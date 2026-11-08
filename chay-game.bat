@@ -7,6 +7,20 @@ if errorlevel 1 (
   pause
   exit /b 1
 )
+if not exist "node_modules\ws\package.json" goto install_node
+if not exist "node_modules\tiktok-live-connector\package.json" goto install_node
+goto check_game
+
+:install_node
+echo Dang cai thu vien game lan dau, can mang Internet...
+call npm ci --no-audit --no-fund
+if errorlevel 1 (
+  echo Khong cai duoc thu vien. Kiem tra mang roi mo lai file nay.
+  pause
+  exit /b 1
+)
+
+:check_game
 node tools\check-game.js
 if errorlevel 4 goto ask_live
 if errorlevel 3 goto update
@@ -42,7 +56,13 @@ echo Dang chay game. Mo http://127.0.0.1:3000/control de dieu khien.
 echo Tat cua so nay de dung server.
 tools\vieneu\.venv\Scripts\python.exe -c "import vieneu" >nul 2>nul
 if errorlevel 1 (
-  echo Dang cai engine giong nu VieNeu lan dau...
+  python --version >nul 2>nul
+  if errorlevel 1 (
+    echo Chua tim thay Python. Cai Python va tich o "Add python.exe to PATH" roi mo lai file nay.
+    pause
+    exit /b 1
+  )
+  echo Dang cai giong doc VieNeu lan dau, mat vai phut...
   powershell -NoProfile -ExecutionPolicy Bypass -File tools\vieneu\setup.ps1
   if errorlevel 1 (
     pause
