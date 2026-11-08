@@ -1,0 +1,610 @@
+*{box-sizing:border-box;margin:0;padding:0}html,body{width:100%;height:100%;overflow:hidden;background:#110b09;font-family:"Segoe UI",Arial,sans-serif}#viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}#stage{position:relative;width:1080px;height:1920px;flex:none;overflow:hidden;transform-origin:center;background:#522016}#stage img{user-select:none;-webkit-user-drag:none}#bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#wedding-title{position:absolute;left:150px;right:150px;top:70px;padding:15px 20px;background:linear-gradient(135deg,#531316ed,#8c2528ed);border:3px solid #dfb85b;border-radius:24px;text-align:center;color:#ffefd0;box-shadow:0 8px 30px #18060480;z-index:100}#wedding-title>span{font-size:23px;letter-spacing:5px;font-weight:700}#couple{font:italic 700 51px Georgia,serif;line-height:1.2;margin:5px 0}#guest-count{font-size:23px;color:#f5d08b}
+#boards{position:absolute;top:370px;left:90px;display:flex;gap:12px;z-index:110}.board{width:185px;min-height:145px;text-align:center;background:#fff4ddeb;border:3px solid #d3a24c;border-radius:16px;box-shadow:0 6px 15px #0003;display:flex;flex-direction:column;justify-content:center;gap:5px}.board b{font-size:23px;color:#34617a}.board.bride b{color:#9f324f}.board strong{font-size:35px;color:#5b1817}.board span{font-size:22px;color:#695442}#ledger{position:absolute;top:370px;right:90px;width:380px;min-height:145px;background:#fff4ddeb;border:3px solid #d3a24c;border-radius:16px;overflow:hidden;z-index:110}#ledger h2{font-size:23px;padding:7px 15px;background:#701b1b;color:#ffe6a4;text-align:center;letter-spacing:2px}#ledger-rows{padding:5px 13px;color:#876a4f;font-size:21px;text-align:center}.lrow{display:flex;justify-content:space-between;gap:10px;line-height:1.6}.lrow b{max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#542320}.lrow span{font-weight:800;color:#a32d26}
+#bubble{position:absolute;left:180px;right:180px;top:242px;min-height:60px;padding:10px 22px;background:#fff7df;border:3px solid #d7ad59;border-radius:20px;color:#542320;text-align:center;font-size:26px;font-weight:700;line-height:1.25;opacity:0;transform:translateY(-6px);transition:opacity .15s,transform .15s;z-index:200}#bubble.show{opacity:1;transform:none}#bubble .who{font-size:19px;display:block;color:#a63631;margin-bottom:3px}
+#chars,#tables,#guests,#walkers,#fx{position:absolute;inset:0;pointer-events:none}.rig{position:absolute;transform-origin:50% 100%;z-index:600}.rig img{position:absolute;display:block}.bob{animation:bob 3s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-3px) scale(var(--s,1))}}.talking{animation:talk .4s ease-in-out infinite}@keyframes talk{50%{transform:translateY(-4px) scale(var(--s,1))}}
+.banquet-table{position:absolute;pointer-events:none}.banquet-table>img{width:100%;height:100%;object-fit:contain}.banquet-table>span{position:absolute;left:50%;top:66%;transform:translateX(-50%);font-size:17px;font-weight:800;color:#ffe3ac;background:#651c1b;border:1px solid #dcae4a;border-radius:8px;padding:2px 10px;white-space:nowrap}
+.guest{position:absolute;transition:left .3s,top .3s;pointer-events:none}.portrait{position:absolute;inset:0;background-size:200% 200%;background-repeat:no-repeat;transform-origin:50% 100%}.guest .portrait{animation:guest-bob 3.4s ease-in-out infinite}@keyframes guest-bob{50%{transform:translateY(-2px)}}.guest:nth-child(3n) .portrait{animation-delay:-1.5s}.tag{position:absolute;top:0;left:50%;transform:translate(-50%,-70%);max-width:105px;padding:2px 8px;background:#341d17e8;border:1px solid #e4bd73;border-radius:10px;color:#fff5da;font-size:18px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.guest.away .portrait{opacity:.12}.guest.away .tag{opacity:.55}
+#walkers{z-index:2300}.runner{position:absolute;left:0;top:0;width:84px;height:84px;filter:drop-shadow(0 5px 3px #0003)}.runner .portrait{animation:run-bob .2s linear infinite}@keyframes run-bob{50%{transform:translateY(-7px) rotate(3deg)}}.runner .tag{top:-3px;font-size:20px;background:#7d2623}.carried-envelope{position:absolute;left:43px;top:48px;color:#f5cb69;background:#b12828;font-size:24px;line-height:1;padding:2px 4px;rotate:-8deg;border:1px solid #eec96c}
+#giftbox{position:absolute;left:616px;top:675px;width:75px;z-index:800}#giftbox img{width:100%}#giftbox-total{position:absolute;left:50%;top:-29px;transform:translateX(-50%);font-size:23px;font-weight:800;color:#ffe4a0;background:#741d20;border:2px solid #e7bd63;border-radius:10px;padding:1px 10px;white-space:nowrap}.bump{animation:bump .3s ease-out}@keyframes bump{50%{scale:1.12}}
+#hint{position:absolute;top:1810px;left:160px;right:160px;text-align:center;font-size:22px;color:#fff0ce;background:#32140ec7;padding:7px;border:1px solid #a76e37;border-radius:12px;z-index:120}#hint b{color:#ffda78}#guest-more{position:absolute;bottom:110px;left:50%;transform:translateX(-50%);font-size:23px;color:#ffe8b2;background:#351715bb;border-radius:12px;padding:6px 18px;z-index:2500}#guest-more:empty{display:none}#fx{z-index:2600}.say{position:absolute;max-width:230px;transform:translate(-50%,-100%);background:#fff8e6;color:#48241c;border:2px solid #cfa551;border-radius:12px;padding:5px 10px;text-align:center;font-size:21px;font-weight:700}.float{position:absolute;font-size:27px;font-weight:800;color:#ffe094;text-shadow:0 2px 3px #5e1714}
+#unlock{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:9999;border:1px solid #f7d08d;border-radius:18px;padding:12px 20px;background:#8d2927;color:#fff3d2;font-size:17px;cursor:pointer}#audio-status{position:fixed;bottom:8px;left:8px;right:8px;padding:10px;background:#742c29;color:white;font-size:14px;text-align:center;border-radius:10px;z-index:9999}#audio-status button{margin-left:8px;padding:5px 10px;cursor:pointer}
+
+.scene-sprite{position:absolute;background-size:400% 200%;background-repeat:no-repeat;filter:drop-shadow(0 6px 4px #0004)}#party-banner{position:absolute;top:775px;left:160px;right:160px;background:linear-gradient(90deg,#66191be8,#a23625ed,#66191be8);border:2px solid #f4cb71;border-radius:18px;padding:13px;text-align:center;color:#ffebae;font-size:27px;font-weight:800;z-index:2500}#party-progress{position:absolute;top:1795px;left:50px;right:50px;padding:9px 12px;background:#421718e8;border:1px solid #c69b55;border-radius:15px;color:#ffe3a1;text-align:center;font-size:21px;z-index:2500}#hint{top:1850px;font-size:20px}#guest-more{bottom:155px;font-size:20px}.tag{max-width:145px;font-size:20px}.banquet-table.glow{filter:drop-shadow(0 0 24px #ffdc71)}.guest.celebrate .portrait{animation:cheer .5s ease-in-out infinite alternate}@keyframes cheer{to{transform:translateY(-9px) rotate(5deg)}}.stage-spotlight{position:absolute;left:365px;top:515px;width:380px;height:260px;background:linear-gradient(#fff2a922,#ffe39999);clip-path:polygon(45% 0,55% 0,100% 100%,0 100%);mix-blend-mode:screen}.party-particle{position:absolute;font-size:35px;color:#ff7190;text-shadow:0 2px 4px #5d1225}.firework{position:absolute;width:8px;height:8px;background:#ffdf85;border-radius:50%;box-shadow:0 0 14px #ffb25c}
+.guest-pose,.portrait[data-pose]{background-size:400% 300%}.portrait[data-pose="toast"]{background-position:var(--guest-col) 50%!important}.portrait[data-pose="clap"]{background-position:var(--guest-col) 100%!important}.guest.on-stage{visibility:hidden}
+#reception{position:absolute;inset:0;pointer-events:none;z-index:2100}#reception .guest{top:1650px;width:75px;height:75px}#reception .tag{font-size:17px;max-width:95px}
+
+/* Scene titles use the header gap; walking actors keep the envelope-runner size. */
+#party-banner{top:310px;left:90px;right:90px;padding:7px 14px;min-height:45px;max-height:56px;overflow:hidden;font-size:20px;line-height:1.2;white-space:normal;overflow-wrap:anywhere;background:#701b1b;z-index:2700}
+.has-party-scene #bubble{top:242px;min-height:0;max-height:61px;overflow:hidden;font-size:20px!important;padding:5px 15px}.has-party-scene #bubble .who{display:none}
+
+
+.has-performance #giftbox{opacity:.25}.stage-spotlight{left:365px;top:515px;width:350px;height:215px}
+
+#reception .guest.on-stage{visibility:hidden}
+
+/* Readable live overlay: calm backdrop, solid cards, distinct event and play guide. */
+#bg{filter:brightness(.74) saturate(.78)}#stage:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#21090d22,transparent 40%,transparent 60%,#21090d22);z-index:1}
+#wedding-title{top:32px;left:125px;right:125px;padding:12px 20px;border-radius:20px;background:#601b25;border-width:2px}#wedding-title>span{font-size:20px;letter-spacing:4px}#couple{font-size:46px}#guest-count{font-size:21px}
+#boards,#ledger{top:350px}.board{background:#fff3db;border-width:2px}.board strong{font-size:34px}#ledger{background:#fff3db;border-width:2px}#ledger h2{font-size:22px;letter-spacing:1px}#ledger h2 small{display:block;font-size:17px;font-weight:500;letter-spacing:0;color:#f2cc8e}#ledger-rows{font-size:20px}#ledger .guest-identity{max-width:230px}#ledger .lrow{line-height:1.35}
+#party-banner{top:192px;left:90px;right:90px;height:140px;max-height:none;padding:10px 20px;border:1px solid #d5aa62;border-radius:18px;background:#521b26;white-space:normal;overflow:hidden;box-shadow:0 8px 22px #1a060a66;text-align:left;display:flex;flex-direction:column;gap:5px;justify-content:center}#party-banner[hidden]{display:none}#event-heading{font-size:20px;letter-spacing:2px;color:#e8bd73;font-weight:700}#event-guests{display:flex;gap:12px;align-items:center;min-width:0}#event-guests:empty{display:none}#event-guests>small{margin-left:auto;font-size:20px;color:#e5c597;flex:none}#event-caption{font-size:24px;color:#fff1d8;font-weight:500;line-height:1.2}.has-party-scene #bubble{display:none}#bubble{top:224px;left:100px;right:100px;background:#fff0d8;border-width:2px;font-size:26px}
+.guest-identity{display:inline-flex;align-items:center;gap:5px;min-width:0;max-width:100%;vertical-align:middle}.avatar{display:inline-flex;position:relative;align-items:center;justify-content:center;flex:0 0 25px;width:25px;height:25px;border-radius:50%;overflow:hidden;background:#a75547;border:1px solid #e7c58e;color:#fff3d8}.avatar-fallback{font-size:16px;line-height:1}.avatar img{position:absolute!important;inset:0;width:100%!important;height:100%!important;object-fit:cover}.guest-name{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tag{max-width:125px;padding:3px 5px;border-radius:12px;font-size:21px;background:#38141b;border-color:#c5a26b}.tag .guest-identity{display:flex}.full{flex:1;max-width:100%;gap:12px}.full .avatar{width:45px;height:45px;flex-basis:45px}.full .avatar-fallback{font-size:26px}.full .guest-name{font-size:29px;line-height:1.1;white-space:normal;overflow-wrap:anywhere;overflow:visible;font-weight:750}
+#party-progress{top:1668px;left:55px;right:55px;padding:9px 16px;background:#421722;border:1px solid #c29b61;border-radius:14px;z-index:2700}.goal-line{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:23px;color:#f8e7c6;font-weight:700}#kiss-progress-number{font-size:28px;color:#ffcf7b;white-space:nowrap}.goal-track{height:8px;border-radius:8px;background:#241016;margin-top:7px;overflow:hidden}.goal-track i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c57453,#f2ce7f);border-radius:8px;transition:width .25s}
+#hint{top:1745px;left:55px;right:55px;padding:12px 14px;background:#421722;border:1px solid #c29b61;border-radius:18px;color:#fff2d9;z-index:2700;text-align:left}.guide-title{display:flex;justify-content:space-between;gap:10px;color:#e6bc7c;font-size:20px;font-weight:700;margin-bottom:10px}.guide-title>span{font-size:19px;font-weight:400;color:#eedcc2}.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.guide-grid>div{padding:9px 5px;border-radius:12px;background:#642432;text-align:center;display:flex;flex-direction:column;gap:6px}.guide-grid b{font-size:34px;color:#ffe0a0!important;white-space:nowrap}.guide-grid>div>span{font-size:25px;font-weight:700}.guide-grid small{font-size:19px;color:#dcbfa7}#guest-more{bottom:auto;top:1625px;font-size:20px;background:#38141bdc;padding:3px 12px}
+#reception .guest{top:1562px}.moving-guest.toasting{!important;background-size:400% 300%!important;background-position:var(--guest-col) 50%!important}.guest.invited .tag{border:2px solid #ffe5a0;box-shadow:0 0 18px #ffc55c}.guest.invited .portrait{filter:drop-shadow(0 0 10px #ffd580)}
+
+#party-banner{height:146px}#hint{padding:10px 14px}.guide-title{margin-bottom:7px}.guide-grid>div{padding:7px 5px;gap:4px}.guide-grid b{line-height:1.15}.guide-grid>div>span{line-height:1.15}.guide-grid small{line-height:1.15}
+
+/* TikTok portrait: top controls and lower comment area stay clear. */
+#wedding-title{top:235px;left:190px;right:190px;padding:8px 16px;border-radius:14px}#wedding-title>span{font-size:19px;letter-spacing:2px}#couple{font-size:38px;margin:1px 0}#guest-count{font-size:21px}
+#wedding-summary{position:absolute;left:160px;right:160px;top:355px;height:130px;z-index:110;background:#511923f5;border:2px solid #c69a55;border-radius:16px;display:flex;overflow:hidden;box-shadow:0 5px 14px #18060766}
+#boards{position:static;display:flex;gap:0;flex:0 0 290px}#boards .board{width:145px;min-height:0;background:transparent;border:0;border-right:1px solid #b588504d;box-shadow:none;border-radius:0;gap:3px}#boards .board b{font-size:20px;color:#e9c794}#boards .board strong{font-size:30px;color:#fff0c8}#boards .board span{font-size:18px;color:#d8baa0}
+#ledger{position:static;flex:1;width:auto;min-height:0;border:0;border-radius:0;background:transparent}#ledger h2{font-size:21px;padding:5px 10px;background:transparent;color:#ffdda1}#ledger h2 small{display:inline;font-size:17px;margin-left:10px}#ledger-rows{padding:0 10px;font-size:19px;color:#e4c6a9}#ledger .lrow{line-height:1.25}#ledger .lrow b,#ledger .lrow span{color:#fff0cf}#ledger .avatar{width:20px;height:20px;flex-basis:20px}
+#party-banner{top:505px;left:160px;right:160px;height:100px;padding:8px 14px;border-radius:14px}#event-heading{font-size:18px;letter-spacing:1px}#event-caption{font-size:22px}.full .guest-name{font-size:25px}.full .avatar{width:32px;height:32px;flex-basis:32px}
+#bubble{top:510px;left:160px;right:160px;max-height:100px;overflow:hidden;font-size:23px!important;padding:8px 14px}
+#hint{top:770px;left:100px;right:100px;padding:6px 10px;border-radius:12px}.guide-title{font-size:19px;margin-bottom:4px}.guide-grid{gap:8px}.guide-grid>div{flex-direction:row;justify-content:center;align-items:center;gap:8px;padding:5px}.guide-grid b{font-size:25px}.guide-grid>div>span{font-size:22px}.guide-grid small{display:none}
+#party-progress{top:1355px;left:100px;right:100px;padding:6px 12px}.goal-line{font-size:20px}#kiss-progress-number{font-size:23px}.goal-track{height:5px;margin-top:4px}
+#guest-more{top:1420px;font-size:18px}#reception .guest{top:1440px}
+#stage:after{background:linear-gradient(180deg,transparent 69%,#260e1699 78%,#260e16cc 100%)}
+
+/* Compact guest counters and wedding book; larger, spaced banquet rows. */
+#wedding-title{left:235px;right:235px;top:235px;padding:7px 12px}#wedding-title>span{font-size:18px}#couple{font-size:35px}#guest-count{font-size:19px}
+#wedding-summary{left:auto;right:65px;top:375px;width:295px;height:165px;display:flex;flex-direction:column;border-radius:17px;background:linear-gradient(145deg,#63212b,#32131b);border-color:#d4b479}
+#boards{flex:0 0 42px;width:100%;justify-content:center;border-bottom:1px solid #ba8c514d}#boards .board{width:50%;flex-direction:row;gap:8px;border:0}#boards .board strong{display:none}#boards .board b{font-size:28px;line-height:1;color:#70c6ff}#boards .board.bride b{color:#ff9abc}#boards .board span{font-size:24px;font-weight:800;color:#fff2d7}
+#ledger{text-align:center;overflow:hidden}#ledger h2{font:italic 700 30px Georgia,serif;padding:5px 0 0;letter-spacing:0}#ledger h2 small{display:block;font:15px 'Segoe UI',sans-serif;margin:3px 0 0;color:#d6b68b}#summary-total{display:block;font-size:29px;color:#ffe0a0;line-height:1.2}#ledger-rows{display:none}
+#hint{top:865px}#party-progress{top:805px}#guest-more{top:1665px}#reception .guest{top:1715px}
+#stage:after{background:linear-gradient(180deg,transparent 76%,#260e1644 90%,#260e1688 100%)}
+
+/* Gift book: ranked donors and a separate latest receipt. */
+#wedding-summary{right:50px;top:365px;width:365px;height:305px}#boards{flex-basis:38px}#ledger h2{font-size:28px;padding-top:4px}#ledger h2 small{display:inline;font-size:16px;margin-left:8px}#summary-total{font-size:25px;margin:2px 0 5px}.ledger-label{font-size:16px;letter-spacing:1px;color:#dab982;padding-bottom:4px}#ledger-rows{display:block;font-size:22px;padding:0 12px}#ledger .lrow{display:flex;align-items:center;gap:8px;line-height:1.4;min-height:31px}#ledger .lrow b{flex:1;min-width:0;max-width:245px;text-align:left}#ledger .lrow>span{flex:none;font-size:21px}#ledger .guest-identity{display:flex;max-width:100%;gap:6px}#ledger .avatar{width:26px;height:26px;flex-basis:26px}#latest-gift{margin:7px 10px 0;padding-top:5px;border-top:1px solid #c7a46866}#latest-gift:empty{display:none}#latest-gift>small{display:block;text-align:left;font-size:15px;color:#dcb982}#latest-gift .lrow{font-size:21px}
+#party-banner{left:80px;right:445px;top:400px;height:115px}#bubble{left:80px;right:445px;top:400px;max-height:115px}
+#party-progress{top:750px;left:95px;right:95px}#hint{top:820px;left:95px;right:95px;padding:9px 12px}.guide-title{font-size:22px;margin-bottom:7px}.guide-grid{gap:10px}.guide-grid>div{flex-direction:column;padding:6px 3px;gap:4px;min-width:0}.guide-grid b{font-size:27px;line-height:1.15}.guide-grid>div>span{font-size:24px;line-height:1.15;white-space:nowrap}.guide-grid small{display:none}
+
+/* Two independent gift cards: latest receipts versus cumulative honors. */
+#wedding-summary{top:350px;right:45px;width:315px;height:300px}#ledger h2{font-size:27px}#summary-total{font-size:23px;margin:0 0 4px}#latest-gift{margin:0;padding:0 10px;border:0;text-align:center;color:#edd5b0;font-size:20px}#latest-gift .lrow{min-height:30px;font-size:21px}#latest-gift .lrow b{max-width:210px}#latest-gift .lrow>span{font-size:20px}#ledger .avatar{width:24px;height:24px;flex-basis:24px}
+#honor-panel{position:absolute;left:45px;top:350px;width:300px;min-height:185px;padding:10px 12px;background:linear-gradient(140deg,#682630f5,#3a1823f5);border:2px solid #d6b774;border-radius:16px;z-index:110;color:#fff0ce;text-align:center;box-shadow:0 5px 15px #38130d44}#honor-panel h2{font:italic 700 28px Georgia,serif}#honor-panel>small{display:block;font-size:15px;letter-spacing:1px;color:#dfbe83;margin:4px 0 8px}#honor-panel #ledger-rows{padding:0;font-size:21px;color:#f3d5b4}#honor-panel .lrow{display:flex;align-items:center;gap:8px;min-height:30px;line-height:1.3}#honor-panel .lrow b{flex:1;min-width:0;text-align:left;color:#fff0ce}#honor-panel .lrow>span{flex:none;color:#ffe09b;font-size:20px}#honor-panel .guest-identity{display:flex;gap:5px}#honor-panel .avatar{width:24px;height:24px;flex-basis:24px}
+#bg{filter:brightness(.95) saturate(.92)}#stage:after{background:linear-gradient(180deg,transparent 78%,#642a0e18 100%)}
+#party-banner,#bubble{left:370px;right:370px;top:405px;max-height:125px}#party-banner{height:125px}#event-heading{font-size:17px}#event-caption{font-size:20px}.full .guest-name{font-size:22px}
+#honor-panel .guest-name,#honor-panel .avatar-fallback{color:#fff0ce}#honor-panel .lrow>span{color:#ffe09b}
+
+/* Aligned live layout: matched cards and a regular banquet grid. */
+#wedding-title{top:205px;left:230px;right:230px;padding:6px 12px;border-width:1px;border-radius:12px}#couple{font-size:34px}#wedding-title>span{font-size:17px;letter-spacing:2px}#guest-count{font-size:18px}
+#wedding-summary,#honor-panel{top:315px;width:320px;height:235px;min-height:0;border:1px solid #d4af73;border-radius:12px;background:#541f29f5;box-shadow:none;overflow:hidden}#wedding-summary{right:50px}#honor-panel{left:50px;padding:8px 12px}#boards{flex-basis:27px}#boards .board b{font-size:22px}#boards .board span{font-size:21px}#ledger h2,#honor-panel h2{font:700 25px Georgia,serif;padding:3px 0}#ledger h2 small{display:none}.ledger-label{display:none}#summary-total{font-size:22px;margin:0 0 3px;color:#f3cc85}#latest-gift{padding:0 10px}#latest-gift .lrow{min-height:27px;line-height:1.1;font-size:20px}#latest-gift .lrow>span{font-size:20px}#ledger .avatar{width:23px;height:23px;flex-basis:23px}#honor-panel>small{font-size:14px;margin:2px 0 9px}#honor-panel .lrow{min-height:39px;font-size:21px}#honor-panel .lrow>span{font-size:21px}#honor-panel .avatar{width:26px;height:26px;flex-basis:26px}
+.tag{width:132px;max-width:132px;padding:3px 5px;font-size:21px;line-height:1.1;border-radius:8px}.tag .avatar{width:23px;height:23px;flex-basis:23px}.tag .guest-identity{gap:4px}.banquet-table>span{font-size:18px}
+#guest-more{top:1850px}#reception .guest{top:1835px}
+
+/* One compact money dashboard; the stage stays open. */
+#money-dashboard{position:absolute;top:315px;left:65px;right:65px;height:220px;display:flex;flex-direction:row-reverse;z-index:110;border:1px solid #d7b477;border-radius:15px;overflow:hidden;background:linear-gradient(120deg,#632638f5,#3e2030f5)}#wedding-summary,#honor-panel{position:static;flex:1;width:50%;height:220px;border:0;border-radius:0;background:transparent;box-shadow:none}#honor-panel{border-right:1px solid #d9b98155;padding:7px 14px}#honor-panel h2,#ledger h2{font-size:24px}#honor-panel>small{margin:0 0 4px;font-size:13px}#honor-panel .lrow{min-height:35px}#boards{flex-basis:24px}#ledger h2{padding:0}#summary-total{font-size:20px;margin:0}#latest-gift .lrow{min-height:25px;font-size:20px}#ledger .avatar{width:21px;height:21px;flex-basis:21px}
+#hint{display:none!important}#party-progress{top:820px;left:160px;right:160px;background:#551e2bd9;padding:6px 12px;border-radius:10px}.goal-line{font-size:22px}#party-banner{top:895px;left:140px;right:140px;height:100px;max-height:100px;padding:7px 12px;text-align:center;background:#512335f2}#event-heading{font-size:21px}#event-caption{font-size:26px}#event-guests .full{justify-content:center}.full .guest-name{font-size:24px}#bubble{left:210px;right:210px;top:745px;max-height:65px;padding:5px 10px;font-size:22px!important}.has-party-scene #bubble{display:none}#giftbox{left:900px;top:700px;width:80px}#giftbox-total{font-size:20px}
+.music-show #chars .rig{animation:wedding-dance .6s ease-in-out infinite alternate}@keyframes wedding-dance{from{transform:translateY(0) rotate(-3deg) scale(var(--s))}to{transform:translateY(-12px) rotate(3deg) scale(var(--s))}}
+
+/* Single warm ivory gift card anchored to the right of the stage. */
+#money-dashboard{left:auto;right:35px;top:315px;width:335px;height:auto;min-height:350px;max-height:390px;display:flex;flex-direction:column;background:#fff0d8f5;border:1px solid #bb8e50;border-radius:16px;padding:8px 12px;box-shadow:0 6px 18px #683a202b;color:#553b2a}
+#money-dashboard #wedding-summary,#money-dashboard #honor-panel{position:static;flex:none;width:100%;height:auto;min-height:0;max-height:none;padding:0;border:0;background:transparent;overflow:hidden}
+#money-dashboard #boards{height:26px;flex-basis:26px;border-bottom:1px solid #c7a27166;margin-bottom:3px}#money-dashboard .board span{color:#51392b;font-size:21px}#money-dashboard .board b{font-size:23px}#money-dashboard .board.groom b{color:#3684ad}#money-dashboard .board.bride b{color:#c26782}
+#money-dashboard #ledger h2{font:700 25px Georgia,serif;color:#71432a;padding:1px 0}#money-dashboard #summary-total{color:#995725;font-size:23px;line-height:1.15;margin:1px 0 6px}#money-dashboard .ledger-label{display:block;font-size:13px;letter-spacing:1px;color:#95724f;padding-bottom:3px}
+#money-dashboard #latest-gift,#money-dashboard #ledger-rows{padding:0;color:#896b50;font-size:19px}#money-dashboard .lrow{min-height:25px;line-height:1.15;gap:6px}#money-dashboard .lrow b{flex:1;min-width:0;max-width:210px;text-align:left;color:#553b2a}#money-dashboard .lrow>span{color:#935125;font-size:20px;flex:none}#money-dashboard .guest-name{color:#553b2a;font-size:20px;font-weight:650}#money-dashboard .guest-identity{display:flex;gap:5px}#money-dashboard .avatar{width:22px;height:22px;flex-basis:22px;border-color:#c3a078;background:#bb8b66}#money-dashboard .avatar-fallback{color:#fff9ed;font-size:14px}
+#money-dashboard #honor-panel{margin-top:8px;padding-top:7px;border-top:1px solid #c7a27188}#money-dashboard #honor-panel h2{font:700 20px 'Segoe UI',sans-serif;color:#81532c;margin-bottom:5px}#money-dashboard #honor-panel>small{display:none}#money-dashboard #honor-panel .lrow{min-height:26px}#money-dashboard #honor-panel .lrow>span{color:#935125}
+#money-dashboard #latest-gift .guest-name{color:#553b2a}#money-dashboard #latest-gift .avatar-fallback{color:#fff9ed}
+
+/* Five highest cumulative donors; content sits inside the custom wedding plaque. */
+#money-dashboard{right:28px;top:315px;width:290px;height:315px;min-height:315px;max-height:315px;padding:20px 18px 18px;background:transparent;border:0;border-radius:0;box-shadow:none;overflow:hidden}#money-dashboard #wedding-summary{height:auto;overflow:visible}#money-dashboard #boards{height:27px;flex-basis:27px;border-bottom:1px solid #bc96694d;margin-bottom:5px}#money-dashboard .board.groom b{color:#247cb9;font-weight:900;font-size:27px}#money-dashboard .board.bride b{color:#d35382;font-weight:900;font-size:27px}#money-dashboard .board span{font-size:22px;color:#503b2b}#money-dashboard #ledger h2{font:700 24px Georgia,serif;color:#70442b}#money-dashboard #summary-total{font-size:25px;color:#9a532b;margin:4px 0 9px}#money-dashboard #latest-gift .lrow{min-height:33px;gap:5px;font-size:21px;line-height:1.15}#money-dashboard #latest-gift .lrow b{max-width:none;min-width:0}#money-dashboard #latest-gift .guest-name{font-size:21px;color:#503725}#money-dashboard #latest-gift .lrow>span{font-size:20px;color:#874924}#money-dashboard #latest-gift .avatar{width:31px;height:31px;flex-basis:31px;border:1px solid #c5a17a}#money-dashboard #latest-gift .guest-identity{gap:5px}#money-dashboard #latest-gift .avatar-fallback{font-size:18px}
+#money-dashboard{height:350px;min-height:350px;max-height:350px;padding:43px 24px 24px}
+
+/* Six independently animated guest cutouts, assembled without atlas bleed. */
+.guest-puppet{position:absolute;inset:0;pointer-events:none}.puppet-part{position:absolute;overflow:hidden;transform-box:fill-box}.puppet-part.head{left:14%;top:0;width:72%;height:43%;z-index:5;transform-origin:50% 90%}.puppet-part.body{left:20%;top:37%;width:60%;height:38%;z-index:3}.puppet-part.arm-left{left:6%;top:41%;width:30%;height:32%;z-index:2;transform-origin:80% 8%}.puppet-part.arm-right{left:64%;top:41%;width:30%;height:32%;z-index:4;transform-origin:20% 8%}.puppet-part.leg-left{left:28%;top:66%;width:28%;height:32%;z-index:1;transform-origin:50% 0}.puppet-part.leg-right{left:48%;top:66%;width:28%;height:32%;z-index:1;transform-origin:50% 0}
+.runner .portrait{display:none}.runner .head,.layered-guest[data-phase="walking"] .head{animation:puppet-head .5s ease-in-out infinite alternate}.runner .arm-left,.layered-guest[data-phase="walking"] .arm-left,.runner .leg-right,.layered-guest[data-phase="walking"] .leg-right{animation:puppet-step .4s ease-in-out infinite alternate}.runner .arm-right,.layered-guest[data-phase="walking"] .arm-right,.runner .leg-left,.layered-guest[data-phase="walking"] .leg-left{animation:puppet-step .4s ease-in-out infinite alternate-reverse}
+.puppet-cup{position:absolute;left:4%;top:34%;font-size:22px;display:none;z-index:6}.toasting .puppet-cup{display:block}.toasting .arm-left{transform:rotate(55deg)}.layered-couple .rig{visibility:visible!important;opacity:1!important}.layered-couple[data-phase="walking"] .arm{animation:couple-arm .45s ease-in-out infinite alternate}.couple-cups{position:absolute;left:40%;top:48%;font-size:27px;display:none;z-index:900}.raising-glasses .couple-cups{display:block}.raising-glasses .arm{animation:couple-arm .8s ease-in-out infinite alternate}
+@keyframes puppet-step{from{transform:rotate(-12deg)}to{transform:rotate(12deg)}}@keyframes puppet-head{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-2px) rotate(2deg)}}@keyframes couple-arm{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}
+#party-banner:not([hidden]){pointer-events:none}.has-party-scene #party-banner{display:none}#stage.has-vote #party-banner{display:flex}
+
+/* Use intact registered walk frames: no independently drifting joints. */
+#bubble,#bubble.show,.has-party-scene #bubble{display:none!important}
+.guest-puppet.intact-walker{background-size:200% 200%;background-repeat:no-repeat;transform-origin:50% 95%;animation:none}
+.layered-couple .walking-rig .arm,.layered-couple[data-phase="walking"] .arm,.layered-couple.raising-glasses .arm{animation:none!important;transform:none!important}
+.layered-couple .walking-rig{animation:none!important}.layered-guest[data-phase="walking"] .intact-walker,.runner .intact-walker{animation:intact-step .4s ease-in-out infinite alternate}@keyframes intact-step{from{transform:translateY(0) rotate(-1deg)}to{transform:translateY(-3px) rotate(1deg)}}
+
+.intact-couple[data-phase="walking"]{filter:drop-shadow(0 4px 2px #0002)}
+
+/* Guest labels stay light across seats, gift walks, and table visits. */
+#stage .tag,#stage .guest.invited .tag{background:transparent;border:0;box-shadow:none;padding:2px 0;text-shadow:0 1px 2px #482218,0 0 3px #482218}
+
+/* Toast actors share depth ordering with tables and seated guests. */
+
+
+.music-show #chars .rig{animation:none}
+.music-dancer{position:absolute;top:510px;width:240px;height:240px;object-fit:contain}.music-dancer.dancer-1{left:320px}.music-dancer.dancer-2{left:560px}
+
+.team-table-guide{position:absolute;top:925px;width:400px;text-align:center;color:#fff4ce;text-shadow:0 1px 3px #633515;font-size:26px;line-height:1.25;z-index:1100}.team-table-guide b{letter-spacing:2px}.team-table-guide small{display:block;font-size:22px}.groom-side{left:50px}.groom-side b{color:#b9e5ff}.bride-side{left:630px}.bride-side b{color:#ffd1df}
+
+/* Registered paper-doll cast: one intact body and two neck-aligned heads. */
+.comic-figure{position:absolute;inset:0;pointer-events:none;transform-origin:50% 100%}
+.comic-figure>img{position:absolute;display:block;object-fit:fill;user-select:none}
+.comic-head{transform-origin:50% 95%}.comic-head.face-2{opacity:0}
+.autonomous .face-1{animation:comic-rest 8s steps(1,end) infinite;animation-delay:var(--face-delay,0s)}
+.autonomous .face-2{animation:comic-laugh 8s steps(1,end) infinite;animation-delay:var(--face-delay,0s)}
+@keyframes comic-rest{0%,83%,96%,100%{opacity:1}84%,95%{opacity:0}}
+@keyframes comic-laugh{0%,83%,96%,100%{opacity:0}84%,95%{opacity:1}}
+.comic-stage.talking .comic-head{animation:none}
+.comic-stage.talking [data-face="0"] .face-1{opacity:1}.comic-stage.talking [data-face="0"] .face-2{opacity:0}
+.comic-stage.talking [data-face="1"] .face-1{opacity:0}.comic-stage.talking [data-face="1"] .face-2{opacity:1}
+#stage .portrait,#stage .portrait[data-pose]{background:none!important}
+.guest .comic-figure{animation:comic-sway 4.5s ease-in-out infinite alternate;animation-delay:var(--face-delay,0s)}
+@keyframes comic-sway{from{transform:rotate(-1deg)}to{transform:rotate(1deg) translateY(-1px)}}
+#stage .comic-walker{background:none!important;animation:intact-step .35s ease-in-out infinite alternate}
+
+.comic-couple .couple-groom{left:-4%;width:62%}.comic-couple .couple-bride{left:43%;width:62%}
+.comic-couple[data-phase="walking"]>.comic-figure{animation:intact-step .35s ease-in-out infinite alternate}
+.raising-glasses .comic-head{animation:none!important}.raising-glasses .face-1{opacity:0}.raising-glasses .face-2{opacity:1}
+
+@media(prefers-reduced-motion:reduce){.autonomous .comic-head,.guest .comic-figure{animation:none}}
+
+/* Matching compact signs replace the unframed team instructions. */
+.team-table-guide{top:895px;width:370px;height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:14px 26px 9px;text-shadow:none;line-height:1.1}
+.team-table-guide b{font-size:27px;letter-spacing:1px}.team-table-guide small{font-size:23px;font-weight:650;color:#74502f}
+.groom-side{left:65px}.bride-side{left:645px}.groom-side b{color:#246a94}.bride-side b{color:#b34768}
+#money-dashboard{height:318px;min-height:318px;max-height:318px}
+
+/* Center both lines inside the plaque's cream inset. */
+.team-table-guide{padding:22px 30px 17px;gap:1px;justify-content:center;line-height:1}
+.team-table-guide b{font-size:23px;line-height:1.1;letter-spacing:.5px}
+.team-table-guide small{font-size:19px;line-height:1.1;font-weight:600}
+/* Team race: blue groom share pulls against the pink bride side; resets every 5-minute round. */
+#team-race{position:absolute;top:118px;left:190px;right:190px;padding:6px 14px 7px;background:#4a1a26ea;border:1px solid #d7b477;border-radius:14px;color:#ffeccb;z-index:2700;text-align:center;box-shadow:0 6px 16px #1a060a55}
+#team-race .race-head{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:21px;font-weight:800;white-space:nowrap}
+#team-race .race-head .groom{color:#9cd6ff}
+#team-race .race-head .bride{color:#ffb0cb}
+#race-timer{font-size:18px;color:#f3d39b;background:#2c0f17;border-radius:8px;padding:0 9px}
+#team-race .race-track{height:12px;margin:5px 0 4px;border-radius:6px;background:#e0608e;overflow:hidden}
+#race-fill{display:block;height:100%;width:50%;background:#2f8fd8;transition:width .4s}
+#race-note{display:block;font-size:16px;color:#f0d2a8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Thank-you strip: every gift appears here at once, newest on top, three at most. */
+#thanks{position:absolute;left:28px;top:330px;width:300px;display:flex;flex-direction:column;gap:6px;z-index:2650;pointer-events:none}
+#thanks .thank{display:flex;align-items:center;gap:8px;padding:5px 10px;background:#fff0d8f2;border:1px solid #c79a5b;border-radius:12px;color:#553b2a;font-size:20px;animation:thank-in .35s ease-out}
+#thanks .thank .guest-identity{display:flex;flex:1;min-width:0;max-width:none;gap:6px;align-items:center}
+#thanks .thank .guest-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:650;color:#553b2a}
+#thanks .thank .avatar{width:28px;height:28px;flex:0 0 28px}
+#thanks .thank>b{color:#a24f22;font-size:21px;flex:none}
+@keyframes thank-in{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:none}}
+/* Short result banner, e.g. the vote count. */
+.flash{position:absolute;left:50%;top:880px;transform:translateX(-50%);padding:10px 22px;background:#5a1d2cf2;border:2px solid #f0c66f;border-radius:16px;color:#ffe9b8;font-size:28px;font-weight:800;white-space:nowrap}
+
+#money-dashboard .score-unit{display:block;font-size:13px;color:#795d42;line-height:1.15;margin:1px 0 3px}#money-dashboard #summary-total{margin:2px 0 5px}#money-dashboard #latest-gift .lrow>span{font-size:19px}
+
+.load-test-badge{position:absolute;top:145px;left:340px;right:340px;padding:8px;text-align:center;font-size:22px;font-weight:800;color:#ffe1a6;background:#302313e8;border:1px solid #d0ab62;border-radius:10px;z-index:4000}
+
+/* Compact live header, left guide and donor book. */
+#wedding-title{top:38px;left:26px;right:26px;padding:16px 22px;background:#650d20f2;border:2px solid #d7ad65;border-radius:22px;text-align:left;display:grid;grid-template-columns:1fr auto;gap:8px;box-shadow:0 4px 12px #24080a55}
+#wedding-title>span{font-size:34px;letter-spacing:.5px;align-self:center;color:#ffe19a}#wedding-title #couple{font-size:31px;line-height:1.15;margin:0;align-self:center;color:#fff1d4}#live-overview{grid-column:1/-1;display:flex;gap:18px;align-items:center;justify-content:space-between;font-size:23px;font-weight:650;white-space:nowrap;color:#f9e7cf}#live-overview #guest-count{font-size:23px;color:#f9e7cf}
+#play-guide{position:absolute;left:28px;top:190px;width:310px;padding:14px 16px;background:#20181be8;border:1px solid #b88a57;border-radius:17px;color:#fff2d3;z-index:110}#play-guide h2{font-size:26px;color:#ffe299;margin-bottom:8px}#play-guide p{font-size:22px;line-height:1.6;font-weight:600;white-space:nowrap}
+#money-dashboard{left:28px;right:auto;top:410px;width:310px;height:auto;min-height:0;max-height:none;padding:14px 14px 16px;background:#24181ce8;border:1px solid #b88a57;border-radius:17px;color:#fff2d3;overflow:hidden}#money-dashboard #ledger{position:static!important;inset:auto!important;width:100%;height:auto;min-height:0;background:transparent;border:0;padding:0}#money-dashboard #ledger h2{font:750 25px 'Segoe UI',sans-serif;color:#ffe299;letter-spacing:0;background:transparent;text-align:left;padding:0 0 8px}#money-dashboard .score-unit{display:none}#money-dashboard #summary-total{display:block;text-align:left;font-size:23px;color:#f9df9a;padding:0 0 8px;margin:0;border-bottom:1px solid #b88a5755}#money-dashboard #summary-total:before{content:'Tổng ';font-size:18px;font-weight:500}#money-dashboard #latest-gift{padding-top:8px}#money-dashboard #latest-gift .lrow{min-height:37px;align-items:center;gap:5px}#money-dashboard #latest-gift .lrow:before{content:attr(data-rank);font-size:19px;color:#e1bc78;width:17px;flex:none}#money-dashboard #latest-gift .guest-name{font-size:21px;color:#fff1d3}#money-dashboard #latest-gift .lrow>span{font-size:21px;color:#ffe29b}#money-dashboard #latest-gift .avatar{width:30px;height:30px;flex-basis:30px;border-color:#b99768}#money-dashboard #latest-gift .guest-identity{gap:6px}#money-dashboard #latest-gift .lrow b{color:#fff1d3}
+#arrival-toast{position:absolute;left:32px;top:830px;max-width:630px;padding:14px 22px;display:flex;align-items:center;gap:12px;background:#790f29f2;border:2px solid #d6a46d;border-radius:45px;color:#fff3df;font-size:25px;font-weight:650;z-index:2650;pointer-events:none;box-shadow:0 4px 12px #28070b44}#arrival-toast[hidden]{display:none}#arrival-toast .guest-identity{max-width:270px}#arrival-toast .avatar{width:42px;height:42px;flex-basis:42px}#arrival-toast .guest-name{font-size:25px}#thanks{top:190px;left:auto;right:28px;width:285px}#thanks .thank{background:#35161fe8;color:#fff0d1;border-color:#bb986d}#thanks .thank .guest-name{color:#fff0d1}#thanks .thank>b{color:#ffe39d}
+
+/* Donor book shows only the top five, without a total row. */
+#money-dashboard #summary-total{display:none}
+
+
+/* Team commands are already explained in the play guide. */
+.team-table-guide{display:none}
+
+#gift-menu{position:absolute;right:28px;top:250px;width:290px;padding:12px;background:#28171ee8;border:1px solid #b88a57;border-radius:16px;z-index:115;color:#fff0d2}#gift-menu[hidden]{display:none}#gift-menu h2{font-size:23px;color:#ffe19a;padding-bottom:10px;border-bottom:1px solid #b88a5755}#gift-menu-window{overflow:hidden;position:relative;margin-top:5px}#gift-menu-list{will-change:transform}.gift-menu-row{min-height:74px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #b88a5733;padding:4px 3px}.gift-menu-row>span{font-size:43px;flex:0 0 52px;text-align:center}.gift-menu-row div{min-width:0}.gift-menu-row b{display:block;color:#fff1d8;font-size:23px;line-height:1.2;overflow-wrap:anywhere}.gift-menu-row small{display:block;color:#ffe19a;font-size:22px;margin-top:2px}#thanks{top:180px}#gift-stage-fx{position:absolute;inset:0;pointer-events:none;z-index:700}.gift-love-seat{position:absolute;left:415px;top:680px;width:260px;filter:drop-shadow(0 5px 5px #4a152577)}.gift-stage-stars{position:absolute;left:675px;top:530px;font-size:45px;animation:bob 1s infinite}.scene-prop{font-size:34px;background:transparent;border:0;left:45px;top:32px}
+.gift-menu-row>span>img{display:block;width:52px;height:60px;object-fit:contain}.scene-prop>img{position:static!important;display:block;width:48px;height:48px;object-fit:contain}
+.gift-icon-cycle{position:relative;height:60px}
+.gift-icon-cycle>img{position:absolute;inset:0;visibility:hidden;animation:gift-icon-slot 6s steps(1,end) infinite}
+.gift-icon-cycle>img:nth-child(2){animation-delay:3s}
+@keyframes gift-icon-slot{0%{visibility:visible}50%,100%{visibility:hidden}}
+@media(prefers-reduced-motion:reduce){
+ .gift-icon-cycle>img{animation:none}
+ .gift-icon-cycle>img:first-child{visibility:visible}
+}
+.delivered-gift{position:absolute;left:710px;top:660px;width:130px;height:110px;font-size:85px;text-align:center;filter:drop-shadow(0 5px 3px #42182955)}.delivered-gift img{width:100%;height:100%;object-fit:contain}.gift-toast-cups{position:absolute;left:340px;top:635px;color:#ffe0a0;font-size:45px;white-space:nowrap;animation:bob .6s infinite}
+/* Match seated guest dimensions throughout walking and stage scenes. */
+.runner .carried-envelope{left:52%;top:54%}.runner .scene-prop{left:52%;top:38%}
+/* Idle guests are static: body + one head, no continuous animation. */
+.guest .portrait,.guest .comic-figure,.guest .comic-head{animation:none!important}.guest .face-1{opacity:1!important}.guest .face-2{display:none!important}
+#guests .tag{max-width:100px;font-size:18px}#reception .guest{width:130px;height:130px}#reception .tag{max-width:140px;font-size:20px}#guest-more{top:1030px;bottom:auto;max-width:680px;white-space:nowrap;font-size:21px;padding:4px 12px;background:#5b2419b8}
+#guest-more{top:1025px;max-width:190px;white-space:normal;text-align:center;font-size:16px;background:transparent;color:#704220;line-height:1.2}
+#bg{filter:none}
+#reception{z-index:2100}#reception .guest{width:130px;height:130px}#reception .tag{font-size:18px;max-width:118px}#reception .avatar{width:22px;height:22px;flex-basis:22px}
+#guest-more{display:none}
+/* Approved full-body cast: two shared atlases, one image per visible figure. */
+.comic-atlas-frame{display:block;position:absolute;overflow:hidden;pointer-events:none}.comic-atlas-frame>img{position:absolute!important;display:block;max-width:none;max-height:none;object-fit:fill;user-select:none;-webkit-user-drag:none}
+/* Three seated guests per side of a table; waiting groups overlap at the bottom. */
+#guests .tag{max-width:112px;font-size:18px}#reception .tag{font-size:16px;max-width:106px}#reception .avatar{width:20px;height:20px;flex-basis:20px}
+/* Idle seats are smaller; the moving actor keeps the full 146px stage size. */
+#guests .tag{max-width:108px;font-size:17px}#reception .guest:not(.crowd-back) .portrait{opacity:1}#reception .guest.away .portrait{opacity:.12}
+/* Compact donor book stops before the MC; avatars take priority over long names. */
+#money-dashboard{width:220px;padding:11px 10px 12px}
+#money-dashboard #ledger h2{font-size:20px;white-space:nowrap;padding-bottom:7px}
+#money-dashboard #latest-gift .lrow{min-height:44px;gap:4px}
+#money-dashboard #latest-gift .lrow:before{width:12px;font-size:16px}
+#money-dashboard #latest-gift .avatar{width:40px;height:40px;flex-basis:40px}
+#money-dashboard #latest-gift .avatar-fallback{font-size:21px}
+#money-dashboard #latest-gift .guest-identity{gap:5px;max-width:100%;min-width:0}
+#money-dashboard #latest-gift .guest-name{max-width:4ch;font-size:19px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+#money-dashboard #latest-gift .lrow b{flex:1;min-width:0;overflow:hidden}
+#money-dashboard #latest-gift .lrow>span{font-size:19px;white-space:nowrap;flex-shrink:0}
+/* Small transparent arrival notice, centered in the aisle between tables. */
+#arrival-toast{left:50%;top:1135px;transform:translateX(-50%);width:190px;max-width:190px;padding:0;gap:4px;flex-wrap:wrap;justify-content:center;background:transparent;border:0;border-radius:0;box-shadow:none;color:#603b26;font-size:16px;line-height:1.25;text-align:center;text-shadow:0 1px 1px #fff6}
+#arrival-toast .guest-identity{max-width:150px;justify-content:center;gap:4px}
+#arrival-toast .avatar{width:24px;height:24px;flex-basis:24px;border-width:1px}
+#arrival-toast .avatar-fallback{font-size:15px}
+#arrival-toast .guest-name{max-width:100px;font-size:16px}
+/* Two-line donor rows retain a readable name without widening into the MC. */
+#money-dashboard #latest-gift .lrow{display:grid;grid-template-columns:12px minmax(0,1fr);grid-template-rows:22px 22px;column-gap:5px;row-gap:0;align-items:stretch;min-height:48px}
+#money-dashboard #latest-gift .lrow:before{grid-column:1;grid-row:1/3;align-self:center}
+#money-dashboard #latest-gift .lrow b{grid-column:2;grid-row:1/3;align-self:center;overflow:hidden}
+#money-dashboard #latest-gift .guest-identity{display:flex;align-items:flex-start;width:100%;height:40px}
+#money-dashboard #latest-gift .guest-name{max-width:8ch;font-size:18px;line-height:21px}
+#money-dashboard #latest-gift .lrow>span{grid-column:2;grid-row:2;justify-self:end;align-self:center;font-size:18px;line-height:20px}
+
+#heart-progress{
+ position:absolute;left:165px;right:165px;top:154px;min-height:68px;z-index:2100;
+ display:flex;align-items:center;justify-content:space-between;gap:16px;
+ padding:10px 18px 19px;border:2px solid #edbb70;border-radius:15px;
+ background:linear-gradient(110deg,#5c1126,#32131f);box-shadow:0 5px 16px #29081765;
+ color:#fff3d6;font-size:27px;font-weight:750;line-height:1.2;overflow:hidden;
+}
+#heart-progress[hidden]{display:none}
+#heart-goal{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#heart-count{color:#ffdc91;font-size:24px;white-space:nowrap;font-variant-numeric:tabular-nums}
+#heart-progress::before,#heart-fill{position:absolute;bottom:0;left:0;height:8px}
+#heart-progress::before{content:"";width:100%;background:#ffffff20}
+#heart-fill{background:linear-gradient(90deg,#ff567f,#ffce75);border-radius:0 5px 5px 0;transition:width .25s}
+#stage:has(#heart-progress:not([hidden])) #play-guide{top:235px}
+#stage:has(#heart-progress:not([hidden])) #money-dashboard{top:465px}
+#heart-scene{position:absolute;inset:0;pointer-events:none;z-index:1010}.heart-couple{position:absolute;left:550px;top:720px;transform:translate(-50%,-100%);overflow:hidden}.heart-couple img{position:absolute;max-width:none}.heart-hidden{visibility:hidden!important}.heart-effects{position:absolute;inset:0}.heart-particle{position:absolute;width:10px;height:10px;border-radius:50%;box-shadow:0 0 9px currentColor}
+
+.wedding-fireworks{position:absolute;left:0;top:0;width:1080px;height:1000px;pointer-events:none}
+
+.wedding-role-guest{position:absolute;left:50%;top:-18px;transform:translate(-50%,-100%);z-index:2;white-space:nowrap;color:#fff5d9;background:#72202a;padding:4px 10px;border-radius:10px;font-size:22px}
+.wedding-role-guest{width:max-content;max-width:145px;writing-mode:horizontal-tb}
+.wedding-role-guest .guest-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.role-kick-impact{position:absolute;top:575px;width:110px;height:110px;transform:translateX(-50%);animation:role-impact .65s ease-out both}
+@keyframes role-impact{0%{scale:.25}25%{scale:1.2}100%{scale:.75;opacity:0}}
+.park-dance-playing :is(#wedding-title,#play-guide,#money-dashboard,#gift-menu,#heart-progress,#bubble,#arrival-toast,#thanks,#giftbox,#chars,.load-test-badge){opacity:0}
+#park-dance{position:absolute;left:35px;right:35px;top:365px;height:365px;z-index:1800;display:flex;align-items:flex-end;justify-content:space-evenly;pointer-events:none}
+#park-dance[hidden]{display:none}
+#park-dance i{width:245px;height:245px;flex:none;background:url('/assets/characters/park-dance-steps.webp') 0 var(--pose-row,0%)/400% 400% no-repeat;animation:park-entrance .3s ease-out both,park-poses 1.8s steps(1,end) infinite;animation-delay:0s,var(--beat-offset,0s)}
+#park-dance i:nth-child(2){--pose-row:33.3333%;--beat-offset:-.15s}
+#park-dance i:nth-child(3){--pose-row:66.6667%;--beat-offset:-.08s}
+#park-dance i:nth-child(4){--pose-row:100%;--beat-offset:-.22s}
+@keyframes park-entrance{from{opacity:0;transform:translateY(42px) scale(.7)}to{opacity:1;transform:none}}
+@keyframes park-poses{
+ 0%,50%{background-position-x:0%}
+ 14%{background-position-x:33.3333%}
+ 29%,80%{background-position-x:66.6667%}
+ 63%,92%{background-position-x:100%}
+}
+@media(prefers-reduced-motion:reduce){#park-dance i{animation:none}}
+
+.park-dance-playing #camera-world::before{
+ content:"";position:absolute;inset:0;z-index:5000;pointer-events:none;
+ background:radial-gradient(ellipse 49% 17% at 50% 31%,#0000 20%,#080614b5 100%);
+}
+.park-dance-playing #camera-world::after{
+ content:"";position:absolute;inset:0;z-index:5001;pointer-events:none;
+ background:conic-gradient(from 153deg at 19% 12%,transparent 0deg,#57cfff70 19deg,transparent 37deg),
+ conic-gradient(from 170deg at 81% 12%,transparent 0deg,#f477ff70 19deg,transparent 37deg);
+ transform-origin:50% 12%;animation:park-led-sweep 2.4s ease-in-out infinite alternate;
+ clip-path:inset(10% 0 58%);
+}
+.park-dance-playing #park-dance{z-index:5002}
+.park-dance-playing > .wedding-fireworks{z-index:5003}
+.park-dance-finale #park-dance i{animation:none}
+@keyframes park-led-sweep{from{transform:skewX(-17deg)}to{transform:skewX(17deg)}}
+@media(prefers-reduced-motion:reduce){.park-dance-playing #camera-world::after{animation:none}}
+
+#money-dashboard #latest-gift .lrow{height:48px;box-sizing:border-box}
+#latest-gift .donors-window{max-height:192px;overflow:hidden}
+#latest-gift .donors-scrolling{animation:donor-scroll 22s linear infinite}
+@keyframes donor-scroll{
+ 0%,15%,100%{transform:translateY(0)}
+ 50%,65%{transform:translateY(var(--donor-travel))}
+}
+@media(prefers-reduced-motion:reduce){
+ #latest-gift .donors-scrolling{animation:none}
+ #latest-gift .donors-window{overflow-y:auto}
+}
+
+#wedding-title{
+ left:18px;right:18px;top:24px;min-height:145px;box-sizing:border-box;
+ padding:35px 166px 22px;gap:5px 12px;border:0;border-radius:0;
+ background:transparent url('/assets/props/wedding-header-v2.webp') center/100% 100% no-repeat;
+ box-shadow:none;
+}
+#wedding-title>span{font-size:27px}
+#wedding-title #couple{font-size:28px}
+#live-overview{justify-content:center;gap:24px;font-size:23px}
+#live-overview #guest-count{font-size:23px;color:#a7dcff}
+#live-overview>span:nth-child(2){color:#ffbcd5}
+#live-overview b{font-size:27px;color:#fff1ba}
+#waiting-count{color:#ffdc99}
+#receipt-count,#wish-count{display:none}
+#heart-progress{
+ left:145px;right:145px;top:175px;height:90px;min-height:90px;
+ padding:18px 65px 33px;box-sizing:border-box;border:0;border-radius:0;
+ background:transparent url('/assets/props/wedding-hearts-v2.webp') center/100% 100% no-repeat;
+ box-shadow:none;font-size:25px;gap:10px;overflow:visible;
+}
+#heart-count{font-size:23px}
+#heart-progress::before{display:none}
+#heart-track{position:absolute;left:12%;right:12%;bottom:12px;height:10px;border-radius:10px;background:#260715}
+#heart-fill{height:10px;bottom:0;border-radius:10px;background:linear-gradient(90deg,#ed3e79,#ffda7b);overflow:hidden}
+#heart-fill::after{
+ content:"";position:absolute;inset:0;
+ background:repeating-linear-gradient(110deg,transparent 0 15px,#fff7 17px 22px,transparent 24px 38px);
+ background-size:76px 100%;animation:heart-stream 2s linear infinite;
+}
+#heart-marker{position:absolute;left:0;top:50%;transform:translate(-50%,-50%);font-size:28px;
+ color:#ff86b4;text-shadow:0 0 8px #fff,0 0 15px #ff347b;transition:left .25s;line-height:1;
+ animation:heart-beat 1s ease-in-out infinite;
+}
+#stage:has(#heart-progress:not([hidden])) #play-guide{top:275px}
+#stage:has(#heart-progress:not([hidden])) #money-dashboard{top:505px}
+@keyframes heart-stream{to{background-position:76px 0}}
+@keyframes heart-beat{50%{scale:1.2}}
+@media(prefers-reduced-motion:reduce){#heart-fill::after,#heart-marker{animation:none}}
+
+#wedding-title{
+ top:24px;min-height:190px;height:190px;padding:34px 150px 26px;
+ display:grid;grid-template-columns:1fr auto;grid-template-rows:36px 1fr;
+ align-content:center;gap:8px 12px;background:none;isolation:isolate;
+}
+#wedding-title::before{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ border:55px solid transparent;border-left-width:110px;border-right-width:110px;
+ border-image:url('/assets/props/wedding-header-v2.webp') 165 330 fill stretch;
+}
+#wedding-title>span{font-size:28px}
+#wedding-title #couple{font-size:29px}
+#live-overview{
+ display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px 12px;
+ width:100%;text-align:center;line-height:1.2;font-size:23px;
+}
+#live-overview>span:nth-child(-n+3){grid-column:span 2}
+#live-overview #receipt-count,#live-overview #wish-count{
+ display:block;grid-column:span 3;color:#ffe7ba;font-size:22px;
+}
+#heart-progress{
+ top:220px;height:94px;min-height:94px;background:none;
+ padding:18px 50px 30px;isolation:isolate;
+}
+#heart-progress::before{
+ display:block;content:"";position:absolute;inset:0;width:auto;height:auto;
+ border:25px solid transparent;border-left-width:65px;border-right-width:65px;
+ border-image:url('/assets/props/wedding-hearts-v2.webp') 100 260 fill stretch;
+ background:none;z-index:-1;box-sizing:border-box;
+}
+#heart-track{bottom:14px}
+#stage:has(#heart-progress:not([hidden])) #play-guide{top:325px}
+#stage:has(#heart-progress:not([hidden])) #money-dashboard{top:555px}
+
+/* Keep the heart goal above the gift menu heading. */
+#heart-progress{top:200px;height:64px;min-height:64px;padding:10px 50px 22px}
+#heart-progress::before{border-top-width:18px;border-bottom-width:18px}
+#heart-track{bottom:7px;height:8px}
+#heart-fill{height:8px}
+
+#heart-progress{top:182px;height:82px;min-height:82px;padding:13px 50px 27px}
+#heart-progress::before{border-top-width:23px;border-bottom-width:23px}
+#heart-track{bottom:10px;height:10px}
+#heart-fill{height:10px}
+
+#heart-progress{
+ left:125px;right:125px;top:180px;height:94px;min-height:94px;
+ padding:14px 52px 36px;font-size:29px;
+}
+#heart-count{font-size:27px}
+#heart-track{left:10%;right:10%;bottom:12px;height:16px;box-shadow:0 0 9px #ff66964d}
+#heart-fill{height:16px;box-shadow:0 0 10px #ff5c8b80}
+#heart-marker{font-size:36px}
+
+#play-guide,#stage:has(#heart-progress:not([hidden])) #play-guide{top:280px}
+#money-dashboard,#stage:has(#heart-progress:not([hidden])) #money-dashboard{top:510px}
+#gift-menu{top:290px}
+#latest-gift .donors-pinned{position:relative;z-index:1;background:#291a20}
+#latest-gift .donors-window{
+ position:relative;max-height:192px;height:auto;overflow:hidden;
+ contain:paint;isolation:isolate;
+}
+#latest-gift .donors-track{position:relative}
+
+#latest-gift .donors-window{max-height:144px}
+
+#mini-countdown{position:absolute;top:850px;left:350px;right:350px;text-align:center;background:#5c1424e8;border:1px solid #deb16b;border-radius:10px;padding:8px;color:#ffe3a3;font-size:25px;z-index:120;pointer-events:none}
+#mini-countdown[hidden],.park-dance-playing #mini-countdown{display:none}
+
+.food-delivery{position:absolute;left:0;top:0;width:200px;text-align:center;z-index:2800;pointer-events:none;filter:drop-shadow(0 5px 4px #582c2460)}
+.food-delivery .food-waiter{animation:waiter-step .22s ease-in-out infinite alternate}
+.food-delivery img{display:block;width:200px;height:200px;object-fit:contain;transform:scaleX(var(--waiter-facing,1))}
+@keyframes waiter-step{from{translate:0 0;rotate:-1deg}to{translate:0 -4px;rotate:1deg}}
+@media(prefers-reduced-motion:reduce){.food-delivery .food-waiter{animation:none}}
+.food-delivery>.food-caption{display:block;color:#fff6cf;background:#68242be8;border-radius:7px;padding:3px 5px;font-size:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Face-only expression overlays keep the original body, hair and silhouette fixed. */
+.comic-expression{position:absolute;inset:0;display:block;overflow:hidden;opacity:0;animation:guest-expression 9s steps(1,end) infinite;animation-delay:var(--face-delay,0s)}
+.comic-expression>img{position:absolute;max-width:none;max-height:none;object-fit:fill}
+@keyframes guest-expression{0%,83%,98%,100%{opacity:0}84%,97%{opacity:1}}
+.crowd-back .comic-expression{display:none}
+@media(prefers-reduced-motion:reduce){.comic-expression{animation:none;opacity:0}}
+
+/* Swap complete registered sprites: generated heads must never be spliced onto another body. */
+.comic-atlas-frame>.sprite-rest{position:absolute;inset:0;display:block;overflow:hidden}
+.comic-atlas-frame>.sprite-rest>img{position:absolute!important;display:block;max-width:none;max-height:none;object-fit:fill}
+.registered-expression .sprite-rest{animation:registered-head-rest 9s steps(1,end) infinite;animation-delay:var(--face-delay,0s)}
+@keyframes registered-head-rest{0%,83%,98%,100%{opacity:1}84%,97%{opacity:0}}
+.registered-expression .comic-expression{clip-path:none}
+.comic-stage.talking .registered-expression .sprite-rest{animation:none;opacity:1}
+.comic-stage.talking .registered-expression .comic-expression{animation:none;opacity:0}
+.comic-stage.talking .registered-expression[data-face="1"] .sprite-rest{opacity:0}
+.comic-stage.talking .registered-expression[data-face="1"] .comic-expression{opacity:1}
+.food-delivery .food-waiter{position:relative;width:200px;height:200px;transform:scaleX(var(--waiter-facing,1))}
+.food-delivery .food-waiter img{width:unset;height:unset;transform:none}
+#park-dance i{position:relative}
+.crowd-back .registered-expression .sprite-rest{animation:none;opacity:1}
+@media(prefers-reduced-motion:reduce){.registered-expression .sprite-rest{animation:none;opacity:1}#park-dance i{animation:none}}
+#cycle-queue{position:absolute;top:280px;left:28px;right:auto;width:270px;min-height:132px;z-index:120;display:block;padding:10px 12px;background:#28171ee8;border:1px solid #b88a57;border-radius:10px;color:#fff0d2;font-size:21px;pointer-events:none;overflow:hidden}
+#cycle-queue h2{font-size:20px;color:#ffe19a;margin:0 0 10px;padding-bottom:7px;border-bottom:1px solid #b88a5755;white-space:nowrap}
+#cycle-queue small{font-size:18px;color:#e6cfb4}
+.couple-wait-card{display:flex;align-items:center;gap:8px;animation:couple-queue-enter .7s ease-out both}
+.couple-order{flex:0 0 27px;height:27px;line-height:27px;text-align:center;border-radius:50%;background:#8e2937;color:#ffeab9;font-size:18px}
+.couple-wait-names{min-width:0;flex:1;line-height:1.6}
+.couple-wait-names>span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:20px}
+@keyframes couple-queue-enter{from{translate:0 12px;opacity:0}to{translate:0 0;opacity:1}}
+@media(prefers-reduced-motion:reduce){.couple-wait-card{animation:none}}
+#cycle-queue[hidden]{display:none}
+
+
+/* Scattered spectators cross their own side, pause, then mingle again. */
+#reception .guest .portrait,#reception .guest .tag{opacity:1}
+#reception .crowd-wander{animation:crowd-wander var(--crowd-duration,16s) linear var(--crowd-delay,0s) infinite,crowd-gait var(--crowd-duration,16s) steps(1,end) var(--crowd-delay,0s) infinite}
+#reception .crowd-wander .portrait{transform-origin:50% 90%;animation:crowd-steps var(--crowd-duration,16s) linear var(--crowd-delay,0s) infinite}
+#reception .guest.away .portrait{opacity:.12}
+@keyframes crowd-wander{0%,12%,100%{transform:translate(0,0)}38%,53%{transform:translate(var(--walk-x),var(--walk-y))}78%,88%{transform:translate(var(--return-x),var(--return-y))}}
+@keyframes crowd-steps{0%,15%,35%,55%,75%,88%,100%{transform:translateY(0) rotate(0)}18%,24%,30%,58%,64%,70%,91%,97%{transform:translateY(-4px) rotate(-2deg)}21%,27%,33%,61%,67%,73%,94%{transform:translateY(0) rotate(2deg)}}
+@media(prefers-reduced-motion:reduce){#reception .crowd-wander,#reception .crowd-wander .portrait{animation:none}}
+
+/* Clear the carpet only while the couple is actually walking. */
+#reception .crowd-wander{transition:translate 1.1s ease-in-out}
+.aisle-busy #reception .crowd-wander{animation-play-state:paused;transform:translate(0,0)!important;translate:var(--yield-x) 0}
+.aisle-busy #reception .crowd-wander .portrait{animation-play-state:paused}
+
+/* Whole-body four-frame walking sprites. Standing expressions remain independent. */
+.comic-figure.has-walk{--guest-walking:0}
+.crowd-wander .comic-figure.has-walk,.is-walking .comic-figure.has-walk{--guest-walking:inherit}
+.has-walk>.comic-atlas-frame{opacity:calc(1 - var(--guest-walking,0))}
+.sprite-walk{position:absolute;display:block;background-repeat:no-repeat;background-size:400% 500%;opacity:var(--guest-walking,0);transform:scaleX(var(--walk-facing,1));animation:guest-walk-frames .72s steps(4,end) infinite}
+.runner.is-walking{--guest-walking:1}
+@keyframes guest-walk-frames{from{background-position-x:0%}to{background-position-x:133.333333%}}
+@keyframes crowd-gait{0%{--guest-walking:0;--walk-facing:var(--out-facing,1)}12%{--guest-walking:1;--walk-facing:var(--out-facing,1)}38%{--guest-walking:0}53%{--guest-walking:1;--walk-facing:var(--return-facing,1)}78%{--guest-walking:0}88%{--guest-walking:1;--walk-facing:var(--home-facing,1)}100%{--guest-walking:0}}
+.aisle-busy #reception .crowd-wander{--guest-walking:0!important}
+@media(prefers-reduced-motion:reduce){.sprite-walk{animation:none}#reception .crowd-wander{--guest-walking:0}}
+
+.rig.is-walking{--guest-walking:1}
+.rig.is-walking .comic-figure.has-walk{--guest-walking:inherit}
+.rig[data-walk-direction="back"] .sprite-walk{background-position-y:var(--walk-back-y)!important}
+
+/* Separate seated identities and camera angles, layered around the table. */
+.seated-sprite{position:absolute;inset:0;background-repeat:no-repeat;display:block}
+
+/* Camera close-up with a clear identity and a short floating gift amount. */
+.gift-focus-near{filter:blur(2px);opacity:.4;transition:filter .25s,opacity .25s}
+.gift-focus-source{filter:drop-shadow(0 0 5px #ffe898)}
+.gift-focus-source .portrait,.gift-focus-source .tag{opacity:1!important}
+.gift-focus-scene{position:absolute;inset:0;z-index:4700;pointer-events:none}
+.gift-focus-light{position:absolute;left:calc(var(--focus-x) - 90px);top:calc(var(--focus-y) - 225px);width:180px;height:240px;clip-path:polygon(45% 0,55% 0,100% 100%,0 100%);background:linear-gradient(#fff8cc00,#fff2a91a);animation:focus-fade .25s ease-out both}
+.gift-focus-caption{position:absolute;left:var(--focus-x);top:var(--focus-head-y);transform:translate(-50%,-100%);text-align:center;width:200px;color:#fff6d5;text-shadow:0 1px 2px #521316,0 0 3px #521316}
+.gift-focus-identity{display:flex;align-items:center;justify-content:center;gap:4px;min-width:0;font-size:14px;font-weight:800}
+.gift-focus-identity .avatar{width:19px;height:19px;flex:0 0 19px}
+.gift-focus-identity .guest-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:175px}
+.gift-focus-caption small{display:block;font-size:10px}
+.gift-focus-amount{position:absolute;bottom:calc(100% + 4px);left:0;right:0;font-size:24px;color:#ffe26e;animation:donor-gift-rise .9s ease-out 1.3s both}
+.donor-camera-active #thanks{opacity:0}
+@keyframes donor-gift-rise{0%{translate:0 0;opacity:1}100%{translate:0 -22px;opacity:0}}
+@keyframes focus-fade{from{opacity:0}to{opacity:1}}
+
+#camera-world{position:absolute;inset:0;transform-origin:0 0;transition:transform .65s cubic-bezier(.22,.61,.36,1)}
+@media(prefers-reduced-motion:reduce){#camera-world{transition:none}}
+.gift-focus-source>.tag,.gift-focus-source>.wedding-role-guest{visibility:hidden}
+
+#reception .gift-focus-source,#reception .gift-focus-source .portrait{animation-play-state:paused!important}
+
+/* Ground-level envelope box, outside the stage and clear of dining tables. */
+#giftbox{left:990px;top:875px;width:70px;z-index:950}
+
+/* Catering staff use the same whole-body gait renderer as guests. */
+.food-delivery.is-walking{--guest-walking:1}
+.food-delivery .comic-figure.has-walk{--guest-walking:inherit}
+.food-delivery .food-waiter{animation:none}
+
+/* Only guests physically sharing the couple's aisle area recede. */
+.aisle-guest-muted{filter:blur(2px) brightness(.7)!important;opacity:.45!important;transition:filter .25s,opacity .25s}
+#stage:is([data-cycle-phase="welcome"],[data-cycle-phase="entrance"]) #chars{z-index:3000}
+
+/* Identity remains visible over both individual rigs and paired ceremony sprites. */
+.wedding-role-guest{background:transparent;border:0;box-shadow:none;padding:0 2px;border-radius:0;text-shadow:0 1px 3px #382015,0 0 4px #382015}
+.heart-role-labels{position:absolute;inset:0;pointer-events:none;z-index:3}
+.heart-role-label{position:absolute;max-width:180px;font-size:20px;visibility:visible!important}
+.heart-role-label .avatar{width:25px;height:25px;flex:0 0 25px}
+.heart-role-label .guest-identity{display:flex;align-items:center;gap:4px}
+
+#cycle-queue .couple-wait-person{display:flex;align-items:center;gap:5px;min-width:0;overflow:hidden}
+#cycle-queue .couple-wait-person>small{flex:0 0 34px;font-size:17px}
+#cycle-queue .guest-identity{display:flex;align-items:center;gap:5px;min-width:0;flex:1;overflow:hidden}
+#cycle-queue .avatar{width:25px;height:25px;flex:0 0 25px}
+#cycle-queue .guest-name{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:19px}
+
+.gift-rose-only{display:flex;align-items:center;justify-content:center}.gift-rose-only>img{width:48px;height:48px;object-fit:contain}
+
+/* Ground walkers and serving staff match the standing-hall guest size. */
+.food-delivery{width:130px}
+.food-delivery .food-waiter{width:130px;height:130px}
+.food-delivery>.food-caption{font-size:14px;padding:2px 3px}
+
+/* The arriving thief and contact flash must sit above the wedding couple. */
+.takeover-active #walkers{z-index:4100}
+.takeover-active #gift-stage-fx{z-index:4200}
+#walkers .takeover-attacker{opacity:1!important;filter:drop-shadow(0 0 4px #fff1a4)!important}
+#stage .takeover-attacker .comic-walker{animation:none!important;transform-origin:50% 85%}
+
+/* Isolate the two participants for the whole run-up, kick and outgoing flight. */
+.takeover-active :is(#guests,#reception){filter:blur(3px) brightness(.7);opacity:.4}
+.takeover-active #walkers>.runner:not(.takeover-attacker),.takeover-active .food-delivery{filter:blur(3px);opacity:.35}
+.takeover-active #chars>.rig{filter:blur(3px);opacity:.35}
+.takeover-active[data-takeover-role="bride"] #chars>.rig:has([data-character="bride"]),
+.takeover-active[data-takeover-role="groom"] #chars>.rig:has([data-character="groom"]){filter:none;opacity:1}
+
+/* A fixed, faint ambient layer; transforms only, no particles allocated per frame. */
+#ambient-hearts{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2501}
+#ambient-hearts i{position:absolute;left:var(--x);top:100%;font-style:normal;font-size:var(--size);color:#ff75a4;text-shadow:0 0 6px #fff8;opacity:0;animation:ambient-heart-rise var(--duration) var(--delay) linear infinite,ambient-heart-beat var(--beat-duration,3s) var(--beat-delay,0s) ease-in-out infinite;filter:none}
+@keyframes ambient-heart-beat{0%,32%,100%{scale:1}12%{scale:1.16}23%{scale:1.07}}
+@keyframes ambient-heart-rise{0%{transform:translate3d(0,30px,0);opacity:0}12%,80%{opacity:.42}100%{transform:translate3d(var(--drift),-2000px,0);opacity:0}}
+.say{overflow-wrap:anywhere;line-height:1.25}
+.say .chat-result{display:block;margin-top:4px;padding-top:3px;border-top:1px solid #decda8;color:#36694c;font-size:17px;font-weight:600}
+@media(prefers-reduced-motion:reduce){#ambient-hearts{display:none}}
+/* Each diner takes a few bites, then rests; the ID-derived phase avoids synchronised tables. */
+.has-eating>.seated-sprite{animation:seated-eating var(--eat-duration) steps(1,end) var(--eat-delay) infinite}
+@keyframes seated-eating{
+ 0%,28%,60%,100%{background-position-x:var(--eat-rest-x)}
+ 14%,45%,76%{background-position-x:var(--eat-bite-x)}
+ 21%,52%,83%{background-position-x:var(--eat-chew-x)}
+}
+@media(prefers-reduced-motion:reduce){.has-eating>.seated-sprite{animation:none;background-position-x:var(--eat-rest-x)}}
+/* Overscan keeps the scene edges covered during the small camera movement. */
+#ambient-camera{position:absolute;inset:0;transform-origin:center;animation:ambient-camera-drift 38s ease-in-out infinite;will-change:transform}
+@keyframes ambient-camera-drift{0%,100%{transform:translate3d(-5px,-7px,0) scale(1.018)}33%{transform:translate3d(6px,8px,0) scale(1.018)}68%{transform:translate3d(-3px,10px,0) scale(1.022)}}
+#ambient-fireworks{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2502}
+.ambient-burst{position:absolute;width:0;height:0;animation:ambient-burst-life 5s linear both}
+.ambient-burst i{position:absolute;width:10px;height:10px;border-radius:50%;background:hsl(var(--burst-hue) 90% 78%);box-shadow:0 0 7px #fff6;animation:ambient-spark 1.8s ease-out both}
+@keyframes ambient-spark{0%{transform:translate3d(0,0,0) scale(.4);opacity:0}10%{opacity:.85}75%{opacity:.4}100%{transform:translate3d(var(--spark-x),var(--spark-y),0) scale(.1);opacity:0}}
+@keyframes ambient-burst-life{to{visibility:hidden}}
+.ambient-paused #ambient-camera,.ambient-paused #ambient-hearts i{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){#ambient-camera{animation:none;transform:none}#ambient-fireworks{display:none}}
+
+.ambient-ribbon{position:absolute;display:block;width:12px;height:36px;border-radius:2px;background:hsl(var(--ribbon-color) 90% 62%);box-shadow:0 1px 3px #5113;animation:ambient-ribbon-fall 4.5s ease-in-out both}
+@keyframes ambient-ribbon-fall{0%{transform:translate3d(0,0,0) rotate(0);opacity:0}8%{opacity:.8}30%{transform:translate3d(calc(var(--ribbon-x)*.45),var(--ribbon-rise),0) rotate(110deg);opacity:.8}85%{opacity:.65}100%{transform:translate3d(var(--ribbon-x),var(--ribbon-fall),0) rotate(var(--ribbon-spin));opacity:0}}
+.park-dance-playing #ambient-hearts{visibility:hidden}
+.park-dance-playing #camera-world{
+ transform-origin:50% 30%;transition:none;
+ animation:park-camera-shot 7.584s both;
+}
+@keyframes park-camera-shot{
+ 0%,100%{transform:none}
+ 25%{transform:translate3d(9%,7%,0) scale(1.24)}
+ 65%{transform:translate3d(-9%,7%,0) scale(1.24)}
+ 82%{transform:translate3d(0,3%,0) scale(1.13)}
+}
+.park-dance-playing #camera-world::after{
+ animation-duration:1.45s;
+ mix-blend-mode:screen;
+}
+@media(prefers-reduced-motion:reduce){
+ .park-dance-playing #camera-world{animation:none}
+}
+
+
+/* Hủy hôn */
+.wedding-cancel-active #chars>.rig{filter:none!important;opacity:1!important}
+.wedding-cancel-stamp{position:absolute;transform:translateX(-50%) rotate(-10deg);padding:10px 34px;border:9px solid #d3122f;border-radius:18px;background:#fff6efe6;color:#d3122f;font-size:82px;font-weight:900;letter-spacing:.04em;white-space:nowrap;box-shadow:0 10px 30px #0006;animation:wedding-stamp .4s cubic-bezier(.2,1.5,.5,1) both;z-index:5}
+@keyframes wedding-stamp{from{opacity:0;scale:2.6}to{opacity:1;scale:1}}

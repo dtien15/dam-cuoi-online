@@ -1,0 +1,236 @@
+{
+  "scenes": {
+    "toast": [
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-a.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 41,
+        "y": 3,
+        "w": 418,
+        "h": 334
+      },
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-a.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 553,
+        "y": 3,
+        "w": 418,
+        "h": 334
+      },
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-a.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 1065,
+        "y": 3,
+        "w": 418,
+        "h": 334
+      }
+    ],
+    "cheek": [
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-a.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 110,
+        "y": 347,
+        "w": 344,
+        "h": 324
+      },
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-a.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 622,
+        "y": 347,
+        "w": 344,
+        "h": 324
+      },
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-a.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 1134,
+        "y": 347,
+        "w": 344,
+        "h": 324
+      }
+    ],
+    "cake": [
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-a.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 83,
+        "y": 683,
+        "w": 375,
+        "h": 338
+      },
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-a.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 595,
+        "y": 683,
+        "w": 375,
+        "h": 338
+      },
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-a.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 1107,
+        "y": 683,
+        "w": 375,
+        "h": 338
+      }
+    ],
+    "rings": [
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-b.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 57,
+        "y": 1,
+        "w": 397,
+        "h": 336
+      },
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-b.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 569,
+        "y": 1,
+        "w": 397,
+        "h": 336
+      },
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-b.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 1081,
+        "y": 1,
+        "w": 397,
+        "h": 336
+      }
+    ],
+    "fireworks": [
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-b.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 43,
+        "y": 342,
+        "w": 409,
+        "h": 334
+      },
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-b.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 555,
+        "y": 342,
+        "w": 409,
+        "h": 334
+      },
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-b.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 1067,
+        "y": 342,
+        "w": 409,
+        "h": 334
+      }
+    ],
+    "kiss": [
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-b.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 68,
+        "y": 683,
+        "w": 376,
+        "h": 335
+      },
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-b.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 580,
+        "y": 683,
+        "w": 376,
+        "h": 335
+      },
+      {
+        "src": "/assets/events/cute-v3/ceremony-white-b.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 1092,
+        "y": 683,
+        "w": 376,
+        "h": 335
+      }
+    ],
+    "entrance": [
+      {
+        "src": "/assets/events/cute-v3/entrance-banquet-white.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 55,
+        "y": 12,
+        "w": 430,
+        "h": 481
+      },
+      {
+        "src": "/assets/events/cute-v3/entrance-banquet-white.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 567,
+        "y": 12,
+        "w": 430,
+        "h": 481
+      },
+      {
+        "src": "/assets/events/cute-v3/entrance-banquet-white.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 1079,
+        "y": 12,
+        "w": 430,
+        "h": 481
+      }
+    ],
+    "banquet": [
+      {
+        "src": "/assets/events/cute-v3/entrance-banquet-white.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 58,
+        "y": 522,
+        "w": 435,
+        "h": 480
+      },
+      {
+        "src": "/assets/events/cute-v3/entrance-banquet-white.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 570,
+        "y": 522,
+        "w": 435,
+        "h": 480
+      },
+      {
+        "src": "/assets/events/cute-v3/entrance-banquet-white.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 1024,
+        "x": 1082,
+        "y": 522,
+        "w": 435,
+        "h": 480
+      }
+    ]
+  }
+}

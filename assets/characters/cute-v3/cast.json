@@ -1,0 +1,423 @@
+{
+  "mc": {
+    "sprite": {
+      "src": "/assets/characters/cute-v3/stage-hosts.webp",
+      "sheetWidth": 400,
+      "sheetHeight": 736,
+      "x": 8,
+      "y": 8,
+      "w": 174,
+      "h": 348
+    },
+    "scale": 1,
+    "expression": {
+      "sprite": {
+        "src": "/assets/characters/cute-v3/stage-hosts.webp",
+        "sheetWidth": 400,
+        "sheetHeight": 736,
+        "x": 208,
+        "y": 8,
+        "w": 174,
+        "h": 348
+      },
+      "mode": "whole-frame"
+    }
+  },
+  "groom": {
+    "sprite": {
+      "src": "/assets/characters/cute-v3/stage-hosts.webp",
+      "sheetWidth": 400,
+      "sheetHeight": 736,
+      "x": 8,
+      "y": 376,
+      "w": 179,
+      "h": 348
+    },
+    "scale": 1,
+    "expression": {
+      "sprite": {
+        "src": "/assets/characters/cute-v3/stage-hosts.webp",
+        "sheetWidth": 400,
+        "sheetHeight": 736,
+        "x": 208,
+        "y": 376,
+        "w": 179,
+        "h": 348
+      },
+      "mode": "whole-frame"
+    },
+    "walk": {
+      "src": "/assets/characters/cute-v3/couple-walk.webp",
+      "sheetWidth": 1344,
+      "sheetHeight": 1792,
+      "w": 336,
+      "h": 448,
+      "row": 2,
+      "backRow": 3,
+      "frames": 4,
+      "rows": 4,
+      "stepMs": 180
+    }
+  },
+  "bride": {
+    "sprite": {
+      "src": "/assets/characters/cute-v3/bride-gown.webp",
+      "sheetWidth": 672,
+      "sheetHeight": 448,
+      "x": 0,
+      "y": 0,
+      "w": 336,
+      "h": 448
+    },
+    "scale": 1,
+    "expression": {
+      "sprite": {
+        "src": "/assets/characters/cute-v3/bride-gown.webp",
+        "sheetWidth": 672,
+        "sheetHeight": 448,
+        "x": 336,
+        "y": 0,
+        "w": 336,
+        "h": 448
+      },
+      "mode": "whole-frame"
+    },
+    "walk": {
+      "src": "/assets/characters/cute-v3/couple-walk.webp",
+      "sheetWidth": 1344,
+      "sheetHeight": 1792,
+      "w": 336,
+      "h": 448,
+      "row": 0,
+      "backRow": 1,
+      "frames": 4,
+      "rows": 4,
+      "stepMs": 180
+    }
+  },
+  "waiter": {
+    "sprite": {
+      "src": "/assets/characters/cute-v3/catering-staff.webp",
+      "sheetWidth": 1024,
+      "sheetHeight": 384,
+      "x": 0,
+      "y": 0,
+      "w": 256,
+      "h": 384
+    },
+    "scale": 1,
+    "expression": {
+      "sprite": {
+        "src": "/assets/characters/cute-v3/catering-staff.webp",
+        "sheetWidth": 1024,
+        "sheetHeight": 384,
+        "x": 256,
+        "y": 0,
+        "w": 256,
+        "h": 384
+      },
+      "mode": "whole-frame"
+    },
+    "walk": {
+      "src": "/assets/characters/cute-v3/catering-walk.webp",
+      "sheetWidth": 1024,
+      "sheetHeight": 768,
+      "w": 256,
+      "h": 384,
+      "row": 0,
+      "rows": 2,
+      "frames": 4,
+      "stepMs": 180
+    }
+  },
+  "teenboy": {
+    "sprite": {
+      "src": "/assets/characters/cute-v3/formal-guests.webp",
+      "sheetWidth": 887,
+      "sheetHeight": 1774,
+      "x": 138,
+      "y": 5,
+      "w": 163,
+      "h": 346
+    },
+    "scale": 1,
+    "expression": {
+      "sprite": {
+        "src": "/assets/characters/cute-v3/formal-guests.webp",
+        "sheetWidth": 887,
+        "sheetHeight": 1774,
+        "x": 581,
+        "y": 5,
+        "w": 163,
+        "h": 346
+      },
+      "mode": "whole-frame"
+    },
+    "walk": {
+      "src": "/assets/characters/cute-v3/formal-walk.webp",
+      "sheetWidth": 1024,
+      "sheetHeight": 1920,
+      "w": 256,
+      "h": 384,
+      "row": 0,
+      "frames": 4,
+      "stepMs": 180
+    },
+    "seated": {
+      "src": "/assets/characters/cute-v3/formal-seated.webp",
+      "sheetWidth": 1024,
+      "sheetHeight": 1600,
+      "w": 256,
+      "h": 320,
+      "row": 0,
+      "views": 4,
+      "eating": {
+        "src": "/assets/characters/cute-v3/formal-eating.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 800,
+        "frames": 3,
+        "w": 128,
+        "h": 160
+      }
+    }
+  },
+  "teengirl": {
+    "sprite": {
+      "src": "/assets/characters/cute-v3/formal-guests.webp",
+      "sheetWidth": 887,
+      "sheetHeight": 1774,
+      "x": 128,
+      "y": 362,
+      "w": 169,
+      "h": 344
+    },
+    "scale": 1,
+    "expression": {
+      "sprite": {
+        "src": "/assets/characters/cute-v3/formal-guests.webp",
+        "sheetWidth": 887,
+        "sheetHeight": 1774,
+        "x": 571,
+        "y": 362,
+        "w": 169,
+        "h": 344
+      },
+      "mode": "whole-frame"
+    },
+    "walk": {
+      "src": "/assets/characters/cute-v3/formal-walk.webp",
+      "sheetWidth": 1024,
+      "sheetHeight": 1920,
+      "w": 256,
+      "h": 384,
+      "row": 1,
+      "frames": 4,
+      "stepMs": 180
+    },
+    "seated": {
+      "src": "/assets/characters/cute-v3/formal-seated.webp",
+      "sheetWidth": 1024,
+      "sheetHeight": 1600,
+      "w": 256,
+      "h": 320,
+      "row": 1,
+      "views": 4,
+      "eating": {
+        "src": "/assets/characters/cute-v3/formal-eating.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 800,
+        "frames": 3,
+        "w": 128,
+        "h": 160
+      }
+    }
+  },
+  "aunt": {
+    "sprite": {
+      "src": "/assets/characters/cute-v3/formal-guests.webp",
+      "sheetWidth": 887,
+      "sheetHeight": 1774,
+      "x": 135,
+      "y": 716,
+      "w": 164,
+      "h": 343
+    },
+    "scale": 1,
+    "expression": {
+      "sprite": {
+        "src": "/assets/characters/cute-v3/formal-guests.webp",
+        "sheetWidth": 887,
+        "sheetHeight": 1774,
+        "x": 578,
+        "y": 716,
+        "w": 164,
+        "h": 343
+      },
+      "mode": "whole-frame"
+    },
+    "walk": {
+      "src": "/assets/characters/cute-v3/formal-walk.webp",
+      "sheetWidth": 1024,
+      "sheetHeight": 1920,
+      "w": 256,
+      "h": 384,
+      "row": 2,
+      "frames": 4,
+      "stepMs": 180
+    },
+    "seated": {
+      "src": "/assets/characters/cute-v3/formal-seated.webp",
+      "sheetWidth": 1024,
+      "sheetHeight": 1600,
+      "w": 256,
+      "h": 320,
+      "row": 2,
+      "views": 4,
+      "eating": {
+        "src": "/assets/characters/cute-v3/formal-eating.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 800,
+        "frames": 3,
+        "w": 128,
+        "h": 160
+      }
+    }
+  },
+  "uncle": {
+    "sprite": {
+      "src": "/assets/characters/cute-v3/formal-guests.webp",
+      "sheetWidth": 887,
+      "sheetHeight": 1774,
+      "x": 133,
+      "y": 1070,
+      "w": 171,
+      "h": 344
+    },
+    "scale": 1,
+    "expression": {
+      "sprite": {
+        "src": "/assets/characters/cute-v3/formal-guests.webp",
+        "sheetWidth": 887,
+        "sheetHeight": 1774,
+        "x": 576,
+        "y": 1070,
+        "w": 171,
+        "h": 344
+      },
+      "mode": "whole-frame"
+    },
+    "walk": {
+      "src": "/assets/characters/cute-v3/formal-walk.webp",
+      "sheetWidth": 1024,
+      "sheetHeight": 1920,
+      "w": 256,
+      "h": 384,
+      "row": 3,
+      "frames": 4,
+      "stepMs": 180
+    },
+    "seated": {
+      "src": "/assets/characters/cute-v3/formal-seated.webp",
+      "sheetWidth": 1024,
+      "sheetHeight": 1600,
+      "w": 256,
+      "h": 320,
+      "row": 3,
+      "views": 4,
+      "eating": {
+        "src": "/assets/characters/cute-v3/formal-eating.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 800,
+        "frames": 3,
+        "w": 128,
+        "h": 160
+      }
+    }
+  },
+  "flashy": {
+    "sprite": {
+      "src": "/assets/characters/cute-v3/formal-guests.webp",
+      "sheetWidth": 887,
+      "sheetHeight": 1774,
+      "x": 134,
+      "y": 1424,
+      "w": 171,
+      "h": 346
+    },
+    "scale": 1,
+    "expression": {
+      "sprite": {
+        "src": "/assets/characters/cute-v3/formal-guests.webp",
+        "sheetWidth": 887,
+        "sheetHeight": 1774,
+        "x": 577,
+        "y": 1424,
+        "w": 171,
+        "h": 346
+      },
+      "mode": "whole-frame"
+    },
+    "walk": {
+      "src": "/assets/characters/cute-v3/formal-walk.webp",
+      "sheetWidth": 1024,
+      "sheetHeight": 1920,
+      "w": 256,
+      "h": 384,
+      "row": 4,
+      "frames": 4,
+      "stepMs": 180
+    },
+    "seated": {
+      "src": "/assets/characters/cute-v3/formal-seated.webp",
+      "sheetWidth": 1024,
+      "sheetHeight": 1600,
+      "w": 256,
+      "h": 320,
+      "row": 4,
+      "views": 4,
+      "eating": {
+        "src": "/assets/characters/cute-v3/formal-eating.webp",
+        "sheetWidth": 1536,
+        "sheetHeight": 800,
+        "frames": 3,
+        "w": 128,
+        "h": 160
+      }
+    }
+  },
+  "waitress": {
+    "sprite": {
+      "src": "/assets/characters/cute-v3/catering-staff.webp",
+      "sheetWidth": 1024,
+      "sheetHeight": 384,
+      "x": 512,
+      "y": 0,
+      "w": 256,
+      "h": 384
+    },
+    "scale": 1,
+    "expression": {
+      "sprite": {
+        "src": "/assets/characters/cute-v3/catering-staff.webp",
+        "sheetWidth": 1024,
+        "sheetHeight": 384,
+        "x": 768,
+        "y": 0,
+        "w": 256,
+        "h": 384
+      },
+      "mode": "whole-frame"
+    },
+    "walk": {
+      "src": "/assets/characters/cute-v3/catering-walk.webp",
+      "sheetWidth": 1024,
+      "sheetHeight": 768,
+      "w": 256,
+      "h": 384,
+      "row": 1,
+      "rows": 2,
+      "frames": 4,
+      "stepMs": 180
+    }
+  }
+}

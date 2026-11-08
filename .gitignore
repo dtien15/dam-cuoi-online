@@ -1,0 +1,28 @@
+# Thư viện tự cài khi chạy chay-game.bat / npm install
+node_modules/
+tools/vieneu/.venv/
+tools/vieneu/models/
+__pycache__/
+
+# Dữ liệu riêng của từng máy (game tự tạo lại bản mặc định)
+settings.json
+cache/
+scripts.json
+gift-events.json
+heart-events.json
+rollcall.json
+wedding-cycle.json
+playlist.json
+*.tmp
+*.log
+
+# Đồ làm video, quảng cáo
+marketing/
+
+# Công cụ của Claude Code
+.claude/
+
+# Hệ điều hành
+Thumbs.db
+desktop.ini
+.DS_Store

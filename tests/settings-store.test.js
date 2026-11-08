@@ -1,0 +1,15 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict'),Store=require('../game/settings-store'),Cycle=require('../game/wedding-cycle'),Gift=require('../game/gift-events');
+function fixture(){let sent=[],replaced=0;const store=new Store({defaults:Cycle.defaults(),validate:Cycle.validate,command:'saveWeddingConfig',send:x=>{sent.push(x);return true;},onReplace:()=>replaced++});store.receive(Cycle.defaults());return{store,sent,replaced:()=>replaced};}
+test('saving a setting roundtrips the submitted value and preserves edits made during the request',()=>{
+ const{store,sent}=fixture();store.draft.durations.entrance=24;store.changed();assert.equal(store.state,'dirty');assert.equal(store.save(),true);assert.equal(store.state,'saving');store.draft.scripts.entrance[0][0].text='Mời {re} cùng {dau} lên lễ đường!';store.changed();store.receive({...sent[0].config,revision:1});assert.equal(store.saved.durations.entrance,24);assert.equal(store.draft.durations.entrance,24);assert.equal(store.draft.scripts.entrance[0][0].text,'Mời {re} cùng {dau} lên lễ đường!');assert.equal(store.draft.revision,1);assert.equal(store.state,'dirty');store.save();store.receive({...sent[1].config,revision:2});assert.equal(store.state,'saved');
+});
+test('reconnect and another window cannot silently overwrite dirty settings; discard loads the latest version',()=>{
+ const{store}=fixture();store.draft.durations.entrance=25;store.changed();store.receive(Cycle.defaults());assert.equal(store.draft.durations.entrance,25);assert.equal(store.state,'dirty');store.receive({...Cycle.defaults(),revision:1,durations:{...Cycle.defaults().durations,entrance:12}});assert.equal(store.state,'conflict');assert.equal(store.save(),false);assert.equal(store.draft.durations.entrance,25);store.discard();assert.equal(store.draft.durations.entrance,12);assert.equal(store.draft.revision,1);assert.equal(store.state,'saved');
+});
+test('failed saves keep the draft retryable and invalid durations never reach the server',()=>{
+ const{store,sent}=fixture();store.draft.durations.show=5;store.changed();assert.equal(store.save(),false);assert.equal(sent.length,0);store.draft.durations.show=20;store.changed();store.save();store.fail('Lỗi ghi đĩa');assert.equal(store.draft.durations.show,20);assert.equal(store.pending,null);assert.equal(store.state,'error');store.save();store.receive({...sent.at(-1).config,revision:1});assert.equal(store.state,'saved');
+});
+test('gift scripts and role display names use the same save acknowledgement as the game',()=>{
+ let request;const store=new Store({defaults:Gift.defaults(),validate:Gift.validate,command:'saveGiftEvents',send:r=>{request=r;return true;}});store.receive(Gift.defaults());store.draft.specialNames.bride='Đổi cô dâu';store.draft.roleLines.bride='Chào {ten}! Nhà mình đổi cô dâu rồi!';store.draft.events[0].lines.push('Cảm ơn {ten}, vui quá!');store.changed();store.save();store.receive({...request.config,revision:1});assert.equal(store.state,'saved');assert.equal(store.saved.specialNames.bride,'Đổi cô dâu');assert.equal(store.saved.events[0].lines.length,2);
+});

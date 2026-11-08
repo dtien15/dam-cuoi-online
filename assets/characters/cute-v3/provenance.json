@@ -1,0 +1,35 @@
+{
+  "tool": "image_gen",
+  "guestCharacters": 5,
+  "facialFrames": 2,
+  "source": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a199f9-4fd7-7ca1-99e3-d2af31a73e07\\exec-c513b89d-54ec-4db7-9d28-a6f5dfc46494.png",
+  "retainedActors": [
+    "mc",
+    "groom",
+    "bride",
+    "waiter"
+  ],
+  "walkSource": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a199f9-4fd7-7ca1-99e3-d2af31a73e07\\exec-40c2530f-f0cd-4d91-96ae-66be8a59bc23.png",
+  "walkFramesPerGuest": 4,
+  "coupleWalkSources": [
+    "exec-fc4a13c6",
+    "exec-a166758b"
+  ],
+  "brideStyle": "white lace ballgown, veil, tiara",
+  "seatedSource": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a199f9-4fd7-7ca1-99e3-d2af31a73e07\\exec-94c904b8-5a90-421a-9858-0c4c92dd6aee.png",
+  "seatedViewsPerGuest": 4,
+  "cateringSource": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a199f9-4fd7-7ca1-99e3-d2af31a73e07\\exec-fdfc69a2-3e12-404a-a91e-f7139833d85a.png",
+  "cateringStaff": 2,
+  "walkFramesPerStaff": 4,
+  "eating": {
+    "tool": "image_gen",
+    "sources": [
+      "C:\\tiktok live\\assets\\characters\\cute-v3\\formal-seated.webp",
+      "C:\\Users\\ADMIN\\.codex\\generated_images\\01a199f9-4fd7-7ca1-99e3-d2af31a73e07\\exec-f52e52bd-f94b-47f2-87fc-814c97a483f5.png",
+      "C:\\Users\\ADMIN\\.codex\\generated_images\\01a199f9-4fd7-7ca1-99e3-d2af31a73e07\\exec-8350debb-e264-4b4b-9129-b554f0271993.png"
+    ],
+    "prompt": "Preserve five identities, four seated camera views and fixed chairs; chopsticks to mouth, then closed-mouth chewing; transparent atlas.",
+    "frames": 3,
+    "processing": "Alpha debris cleanup, cell registration, WebP compression"
+  }
+}

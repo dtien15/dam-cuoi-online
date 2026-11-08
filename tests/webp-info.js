@@ -1,0 +1,3 @@
+'use strict';
+const assert=require('node:assert/strict');
+module.exports=bytes=>{assert.equal(bytes.toString('ascii',0,4),'RIFF');assert.equal(bytes.toString('ascii',8,12),'WEBP');for(let offset=12;offset+8<=bytes.length;){const kind=bytes.toString('ascii',offset,offset+4),size=bytes.readUInt32LE(offset+4),p=offset+8;if(kind==='VP8X')return{width:bytes.readUIntLE(p+4,3)+1,height:bytes.readUIntLE(p+7,3)+1,alpha:!!(bytes[p]&16),animated:!!(bytes[p]&2)};if(kind==='VP8L'){const bits=bytes.readUInt32LE(p+1);return{width:(bits&16383)+1,height:((bits>>>14)&16383)+1,alpha:!!(bits&0x10000000)};}if(kind==='VP8 ')return{width:bytes.readUInt16LE(p+6)&16383,height:bytes.readUInt16LE(p+8)&16383,alpha:false};offset=p+size+(size%2);}throw Error('No WebP image chunk');};

@@ -1,0 +1,38 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict'),R=require('../game/rollcall'),Rules=require('../game/rules'),{applySessionEvent:apply}=require('../lib/session-events'),{publicView}=require('../lib/live-view');
+test('old disabled settings still allow both variants',()=>{
+ const config=R.validate({...R.defaults(),enabled:false});
+ assert.equal(config.enabled,undefined);
+ for(const variant of ['rollcall','tug'])assert.doesNotThrow(()=>R.start(Rules.createState(),R.forVariant(config,variant)));
+});
+test('rollcall is manual, validates settings and begins its clock only after intro acknowledgement',()=>{const s=Rules.createState(),c=R.defaults();apply(s,{type:'chat',id:'a',text:'1'},1000);assert.equal(s.rollcall,undefined);const e=R.start(s,c,2000);assert.equal(e.phase,'preparing');assert.equal(R.captures(e,{type:'gift'},2100),false);assert.throws(()=>R.start(s,c,2100));assert.equal(R.ready(e,'wrong',2200),false);assert.equal(R.ready(e,e.id,3000),true);assert.equal(e.selectionEndsAt,13000);assert.equal(R.ready(e,e.id,4000),false);assert.equal(R.tick(e,12999),false);assert.equal(R.kickoff(e,e.id,12999),false);assert.equal(R.tick(e,13000),false);assert.equal(R.kickoff(e,e.id,15000),true);assert.equal(e.endsAt,45000);for(const bad of [{...c,duration:0},{...c,duration:121},{...c,intro:''}])assert.throws(()=>R.validate(bad));});
+test('existing teams seed the roster, changes lock at kickoff, only contest likes score',()=>{
+ const s=Rules.createState();
+ apply(s,{type:'join',id:'a'},900);
+ const e=R.start(s,R.defaults(),1000);
+ assert.equal(e.people.groom,1);
+ apply(s,{type:'chat',id:'a',text:'0'},1100);
+ apply(s,{type:'chat',id:'a',text:'0'},1200);
+ apply(s,{type:'like',id:'a',count:7},1300);
+ assert.deepEqual(e.people,{groom:0,bride:1});
+ assert.equal(s.likes,7);
+ R.ready(e,e.id,2000);
+ apply(s,{type:'chat',id:'a',text:'1'},11998);
+ apply(s,{type:'chat',id:'a',text:'0'},11999);
+ assert.equal(e.people.bride,1);
+ R.kickoff(e,e.id,12000);
+ apply(s,{type:'chat',id:'a',text:'1'},12100);
+ apply(s,{type:'like',id:'unknown',count:99},12101);
+ apply(s,{type:'like',id:'a',count:20},12102);
+ const gift=apply(s,{type:'gift',id:'a',coins:5},12103);
+ assert.equal(gift.rollcallId,e.id);
+ assert.equal(s.total,0);
+ assert.equal(s.likes,7);
+ assert.deepEqual(e.people,{groom:1,bride:1});
+ assert.deepEqual(e.scores,{groom:99,bride:70});
+ R.finish(e,13000);
+ assert.equal(R.view(e).leaders.likes.id,'unknown');
+ assert.equal(R.view(e).leaders.gifts.id,'a');
+});
+test('deadline excludes late votes; result closes once, cancellation and restart require a new manual start',()=>{const s=Rules.createState(),e=R.start(s,{...R.defaults(),duration:10},1000);apply(s,{type:'chat',id:'a',text:'0'},1100);R.ready(e,e.id,2000);R.kickoff(e,e.id,12000);apply(s,{type:'like',id:'a',count:1},21999);apply(s,{type:'chat',id:'b',text:'1'},22000);assert.equal(e.winner,'bride');assert.equal(e.scores.groom,0);assert.equal(R.tick(e,27000),false);assert.equal(R.acknowledgeResult(e,e.id,29000),true);assert.equal(R.tick(e,29000),true);assert.equal(e.phase,'finished');assert.deepEqual(e.participants,{});R.start(s,R.defaults(),30000);R.restore(s);assert.equal(s.rollcall.phase,'cancelled');assert.equal(R.ready(s.rollcall,s.rollcall.id),false);});
+test('public snapshots expose only totals, never per-account ballot history',()=>{const s=Rules.createState(),e=R.start(s,R.defaults(),1000);apply(s,{type:'chat',id:'secret-account',text:'1'},1100);R.ready(e,e.id,2000);R.kickoff(e,e.id,12000);apply(s,{type:'like',id:'secret-account',count:1},12100);const view=publicView(s,12200);assert.equal(view.rollcall.participants,undefined);assert.equal(view.rollcall.scores.groom,1);assert.equal(view.rollcall.serverAt,12200);assert.equal(Rules.migrateState(s).rollcall.id,e.id);});

@@ -1,0 +1,101 @@
+#rollcall-overlay{position:absolute;inset:0;z-index:8000;pointer-events:none;background:rgba(32,8,12,.34)}#rollcall-overlay[hidden]{display:none}.rollcall-panel{position:absolute;left:90px;top:50%;transform:translateY(-50%);width:900px;height:1124.6px;isolation:isolate}.rollcall-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.rollcall-clock{position:absolute;top:28%;left:36%;width:28%;text-align:center;padding:8px 4px;background:#5c1824;color:#ffe6a4;border:2px solid #ecc264;border-radius:8px;font-size:25px;font-weight:900}.rollcall-scores{position:absolute;top:36%;left:18%;right:18%;display:flex;justify-content:space-between;text-align:center;color:#fff0bd}.rollcall-team{width:44%;text-shadow:0 2px 2px #371413}.rollcall-team>span{display:block;font-size:30px;font-weight:900}.rollcall-team strong{display:block;font-size:62px;line-height:1.12;color:#fff4cd;font-weight:900}.rollcall-team small{display:block;font-size:20px}.rollcall-team.groom>span{color:#8cdfff}.rollcall-team.bride>span{color:#ffaccc}.rollcall-actor{position:absolute;top:50%;width:40%;height:32%;background-size:300% 400%;background-repeat:no-repeat;transform-origin:50% 95%}.rollcall-actor.groom{left:8%}.rollcall-actor.bride{right:8%}.rollcall-meter{position:absolute;left:18%;right:18%;top:88.2%;height:6.9%;display:flex;flex-direction:column;justify-content:center;gap:8px}.rollcall-labels{display:flex;justify-content:space-between;gap:8px;font-size:24px;line-height:1.2}.rollcall-labels>b:first-child{color:#126caa}.rollcall-labels>b:last-child{color:#b32263}.rollcall-track{position:relative;height:26px;border:2px solid #ad722b;background:#e96193;border-radius:20px;box-shadow:inset 0 2px 3px #64163340}.rollcall-blue{height:100%;width:50%;background:linear-gradient(#57c9ff,#1287d8);border-radius:20px;transition:width .35s ease}.rollcall-divider{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-style:normal;font-size:28px;color:#fff5bb;text-shadow:0 1px 3px #67212a;transition:left .35s ease}.rollcall-result{position:absolute;top:46.5%;left:12%;right:12%;text-align:center;color:#ffe79a;font-size:34px;font-weight:900;text-shadow:0 3px 2px #50131c}.rollcall-winning{animation:rollcall-victory .48s ease-in-out infinite alternate}@keyframes rollcall-victory{to{transform:translateY(-12px) rotate(3deg)}}
+#rollcall-overlay > .wedding-fireworks{top:50%;transform:translateY(-64%);z-index:1}
+
+.rollcall-meter{top:87.8%;gap:4px}
+.rollcall-track{height:38px;box-shadow:inset 0 3px 5px #64163360,0 2px 6px #64163350}
+.rollcall-divider{font-size:34px}
+#rollcall-overlay[data-phase="active"][data-leader="groom"] .rollcall-blue{box-shadow:0 0 14px #2fafff}
+#rollcall-overlay[data-phase="active"][data-leader="bride"] .rollcall-track{box-shadow:0 0 14px #ef609a}
+@media(prefers-reduced-motion:reduce){.rollcall-blue,.rollcall-divider{transition:none}}
+.rollcall-team strong{font-size:46px}.rollcall-team small{font-size:26px}
+.rollcall-points{position:absolute;top:84%;left:10%;right:10%;text-align:center;color:#fff0bd;font-weight:800;font-size:27px}
+.rollcall-honors{position:absolute;top:76%;left:12%;right:12%;display:grid;gap:5px;z-index:2}
+.rollcall-honors>div{display:flex;align-items:center;justify-content:center;gap:8px;padding:5px 10px;border-radius:10px;background:#5c1824;color:#fff0bd;font-size:26px;font-weight:800}
+#rollcall-overlay[data-phase="result"] .rollcall-points{display:none}
+#rollcall-overlay[data-result-stage="honors"] .rollcall-actor{visibility:hidden}
+.rollcall-honors{top:48%;left:15%;right:15%;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:14px}
+.rollcall-honors>div{position:relative;isolation:isolate;display:grid;justify-items:center;justify-content:stretch;gap:8px;text-align:center;padding:12px 6px;background:#43121b}
+.rollcall-honors>div::before{content:"";position:absolute;inset:-40px 0 8%;z-index:-1;background:linear-gradient(#fff9bdc9,#ffcf6630 85%,transparent);clip-path:polygon(46% 0,54% 0,100% 100%,0 100%)}
+.rollcall-honor-figure{position:relative;width:152px;height:190px}
+.rollcall-honor-avatar{display:grid;place-items:center;width:70px;height:70px;border-radius:50%;overflow:hidden;border:3px solid #ffd876;background:#713341;font-size:28px}
+.rollcall-honor-avatar img{width:100%;height:100%;object-fit:cover}
+.rollcall-honor-label{overflow-wrap:anywhere;font-size:24px}
+.rollcall-honors>div{min-width:0;grid-template-columns:minmax(0,1fr)} .rollcall-honor-name{display:block;width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.tug-lineup{display:none}
+.is-tug{background:rgba(25,12,9,.35)}
+.is-tug .rollcall-frame{height:auto;top:5%;object-fit:initial}
+.is-tug .rollcall-actor{display:none}
+.is-tug .rollcall-team strong{font-size:27px}
+.is-tug .rollcall-team>span,.is-tug .rollcall-team small{font-size:22px}
+.is-tug .tug-lineup{display:block;position:absolute;top:50%;left:5%;width:90%;height:185px;transform:translateX(var(--pull,0px));transition:transform .45s cubic-bezier(.2,.75,.25,1)}
+.tug-team{position:absolute;top:0;width:47%;aspect-ratio:2.25;background:url('/assets/events/cute-v3/tug-teams.webp') no-repeat;background-size:200% 300%}
+.tug-team.groom{left:0}
+.tug-team.bride{right:0}
+.tug-rope{position:absolute;left:4%;width:92%;height:56px;top:55%;object-fit:fill}
+.is-tug .rollcall-points,.is-tug .rollcall-labels{color:#fff5ca;text-shadow:0 1px 3px #250906}
+.is-tug .rollcall-labels b{color:inherit}
+.is-tug .rollcall-result{top:43%}
+.is-tug[data-result-stage="honors"] .tug-lineup{display:none}
+@media(prefers-reduced-motion:reduce){.is-tug .tug-lineup{transition:none}}
+
+.is-tug .rollcall-team>span,.is-tug .rollcall-team small{font-size:19px}
+@media(prefers-reduced-motion:no-preference){
+ .is-tug[data-phase="active"] .tug-lineup{animation:tug-tension .8s ease-in-out infinite alternate}
+ @keyframes tug-tension{from{translate:-3px 0}to{translate:3px 0}}
+}
+
+.is-tug .rollcall-panel::before {
+  content: "";
+  position: absolute;
+  inset: 3% -3% 7%;
+  z-index: -1;
+  background: url('/assets/events/cute-v3/tug-arena.webp') center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+.is-tug .rollcall-panel {
+  transform: translateY(-50%) scale(1.04);
+}
+.is-tug .tug-lineup {
+  top: auto;
+  bottom: 15%;
+  left: -4%;
+  width: 108%;
+  height: 258px;
+}
+.is-tug .tug-team { top: auto; bottom: 0; height: 100%; }
+.tug-outcome .tug-team {
+  background-image: url('/assets/events/cute-v3/tug-results.webp');
+  background-size: 200% 200%;
+}
+.tug-outcome .tug-rope { visibility: hidden; }
+.is-tug .tug-rope { top: auto; bottom: 18%; }
+.is-tug .rollcall-points { top: 85.3%; }
+.is-tug .rollcall-meter { top: 88%; }
+
+/* Align labels with the artwork's two flags and center medallion. */
+.is-tug .rollcall-scores { top: 31%; left: 0; right: 0; line-height: 1.12; }
+.is-tug .rollcall-team { position: absolute; width: 19%; transform: translateX(-50%); }
+.is-tug .rollcall-team.groom { left: 19%; }
+.is-tug .rollcall-team.bride { left: 81%; }
+.is-tug .rollcall-team strong { font-size: 27px; }
+.is-tug .rollcall-team > span, .is-tug .rollcall-team small { font-size: 20px; }
+.is-tug .rollcall-clock {
+  top: 34.2%;
+  left: 50%;
+  width: 17%;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: #4b230d;
+  font-size: 23px;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+#rollcall-overlay:not(.is-tug) .rollcall-points{
+ top:82%;left:17%;right:17%;z-index:3;
+ padding:5px 8px;background:#5a1324e8;border-radius:8px;
+ font-size:25px;line-height:1.2;
+}

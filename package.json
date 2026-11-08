@@ -1,0 +1,13 @@
+{
+  "name": "dam-cuoi-lang",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "tiktok-live-connector": "^2.0.0",
+    "ws": "^8.18.0"
+  }
+}
